@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN PORTLET-->
-        <div class="portlet box blue" style="margin-bottom:0px">
+        <div class="portlet box blue-hoki" style="margin-bottom:0px">
             <div class="portlet-title">
                 <div class="caption">
                     Station List

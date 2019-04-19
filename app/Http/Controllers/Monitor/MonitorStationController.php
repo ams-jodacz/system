@@ -70,172 +70,99 @@ class MonitorStationController extends Controller {
 
 	public function data(){
 		$this->checkPageAction($this->page_id,Action::$View);
-		if (Request::ajax())
+		if (Request::ajax() && Input::has('group_id') && Input::has('type'))
 		{
-			if (Input::has('draw') && Input::get('draw')){
-				$model_name = 'App\Models\Logs\TimeLog';
-				$data = array(
-					'station_group.group_name',
-					'stations.name',
-					'id_number',
-					'date_time',
-					'stations.status',
-					// 'items',
-					// 'id',
-				);
-				$joins = array(
-					'stations,stations.station_id,=,time_logs.station_id,inner',
-					'station_group,station_group.station_group_id,=,stations.station_group_id,inner',
-				);
-				$where = array();
-				$start = Input::get('start');
-				$length = Input::get('length');
-				$search = Input::get('search');
-				// $order = Input::get('order');
-				$order = array(
-					array(
-						'column' => '3',
-						'dir' => 'desc'
-					)
-				);
-				$response = $this->filterData($model_name,$data,$start,$length,$order,$search,$joins,$where);
-				foreach ($response['data'] as &$data) {
-					$member = Member::where('id_number',$data->id_number)->first();
-					$guest_tag = GuestTag::where('id_number',$data->id_number)->first();
-					$data->id = 0;
-					if (!empty($member) && $member != null){
-						$data->full_name = $member->memberInformation->first_name.' '.$member->memberInformation->middle_name.' '.$member->memberInformation->last_name;
-						$data->id = 'm-'.$member->member_id;
-					}
-					else if (!empty($guest_tag) && $guest_tag != null){
-						$guest = Guest::where('tag_id',$guest_tag->tag_id)
-							->whereNotNull('return_date_time')
-							->where('borrow_date_time','<',$data->date_time)
-							->where('return_date_time','>',$data->date_time)
-							->orderBy('borrow_date_time','desc')
-							->first();
-						if (empty($guest)){
-							$guest = Guest::where('tag_id',$guest_tag->tag_id)
-								->whereNull('return_date_time')
-								->where('borrow_date_time','<',$data->date_time)
-								->where('return_date_time','=',NULL)
-								->orderBy('borrow_date_time','desc')
-								->first();
-						}
-						if (empty($guest)){
-							$data->full_name = 'No User But Used!';
-						}
-						else{
-							$data->full_name = $guest->users;
-							$data->id = 'g-'.$guest->id;
-						}
-					}
-					else{
-						$data->full_name = 'Invalid ID Number Added!';
-					}
-					$data->date_time = Carbon::createFromFormat('Y-m-d H:i:s',$data->date_time)->format('m-d-y h:i:s a');
-					if (file_exists('images/'.$data->id_number.'.jpg')){
-						$data->image = $data->id_number.'.jpg';
-					}
-					else{
-						$data->image = 'avatar.png';
-					}
-				}
-				return json_encode($response);
-			}
-			else if (Input::has('group_id') && Input::has('type')){
-				$group_id = Input::get('group_id');
-				$type = Input::get('type');
+			$group_id = Input::get('group_id');
+			$type = Input::get('type');
 
-				switch ($type) {
-					case 'station_count':
-						$station_group = StationGroup::find($group_id);
-						$total_in = 0;
-						$total_out = 0;
-						$in_stations = array();
-						$out_stations = array();
-						if (!is_null($station_group) && !empty($station_group)){
-							foreach ($station_group->station as $station) {
-								if ($station->status == 'In'){
-									$total_in++;
-									$in_stations[] = $station;
-								}
-								else if ($station->status == 'Out'){
-									$total_out++;
-									$out_stations[] = $station;
-								}
+			switch ($type) {
+				case 'station_count':
+					$station_group = StationGroup::find($group_id);
+					$total_in = 0;
+					$total_out = 0;
+					$in_stations = array();
+					$out_stations = array();
+					if (!is_null($station_group) && !empty($station_group)){
+						foreach ($station_group->station as $station) {
+							if ($station->status == 'In'){
+								$total_in++;
+								$in_stations[] = $station;
+							}
+							else if ($station->status == 'Out'){
+								$total_out++;
+								$out_stations[] = $station;
 							}
 						}
+					}
 
-						return json_encode(array(
-							'view' => view('content.monitor_station.monitor_station_profile',
-								array(
-									'in_stations' => $in_stations,
-									'out_stations' => $out_stations,
-									'in_span' => $total_in > 4?3:$total_in != 0?(12/$total_in):0,
-									'out_span' => $total_out > 4?3:$total_out != 0?(12/$total_out):0,
-								)
-							)->render(),
-						));
-						break;
-					case 'station_profile':
-						$station_group = StationGroup::find($group_id);
-						$station_data = array();
-						if (!is_null($station_group) && !empty($station_group)){
-							foreach ($station_group->station as $station) {
-								$data = $station->timeLogs()->orderBy('date_time','desc')->first();
-								// 
-								if (empty($data)){
-									continue;
-								}
-								$member = Member::where('id_number',$data->id_number)->first();
-								$guest_tag = GuestTag::where('id_number',$data->id_number)->first();
-								$data->id = 0;
-								if (!empty($member) && $member != null){
-									$data->full_name = $member->memberInformation->first_name.' '.$member->memberInformation->middle_name.' '.$member->memberInformation->last_name;
-									$data->id = 'm-'.$member->member_id;
-								}
-								else if (!empty($guest_tag) && $guest_tag != null){
+					return json_encode(array(
+						'view' => view('content.monitor_station.monitor_station_profile',
+							array(
+								'in_stations' => $in_stations,
+								'out_stations' => $out_stations,
+								'in_span' => $total_in > 4?3:$total_in != 0?(12/$total_in):0,
+								'out_span' => $total_out > 4?3:$total_out != 0?(12/$total_out):0,
+							)
+						)->render(),
+					));
+					break;
+				case 'station_profile':
+					$station_group = StationGroup::find($group_id);
+					$station_data = array();
+					if (!is_null($station_group) && !empty($station_group)){
+						foreach ($station_group->station as $station) {
+							$data = $station->timeLogs()->orderBy('date_time','desc')->first();
+							// 
+							if (empty($data)){
+								continue;
+							}
+							$member = Member::where('id_number',$data->id_number)->first();
+							$guest_tag = GuestTag::where('id_number',$data->id_number)->first();
+							$data->id = 0;
+							if (!empty($member) && $member != null){
+								$data->full_name = $member->memberInformation->first_name.' '.$member->memberInformation->middle_name.' '.$member->memberInformation->last_name;
+								$data->id = 'm-'.$member->member_id;
+							}
+							else if (!empty($guest_tag) && $guest_tag != null){
+								$guest = Guest::where('tag_id',$guest_tag->tag_id)
+									->whereNotNull('return_date_time')
+									->where('borrow_date_time','<',$data->date_time)
+									->where('return_date_time','>',$data->date_time)
+									->orderBy('borrow_date_time','desc')
+									->first();
+								if (empty($guest)){
 									$guest = Guest::where('tag_id',$guest_tag->tag_id)
-										->whereNotNull('return_date_time')
+										->whereNull('return_date_time')
 										->where('borrow_date_time','<',$data->date_time)
-										->where('return_date_time','>',$data->date_time)
 										->orderBy('borrow_date_time','desc')
 										->first();
-									if (empty($guest)){
-										$guest = Guest::where('tag_id',$guest_tag->tag_id)
-											->whereNull('return_date_time')
-											->where('borrow_date_time','<',$data->date_time)
-											->orderBy('borrow_date_time','desc')
-											->first();
-									}
-									if (empty($guest)){
-										$data->full_name = 'No User But Used!';
-									}
-									else{
-										$data->full_name = $guest->users;
-										$data->id = 'g-'.$guest->id;
-									}
+								}
+								if (empty($guest)){
+									$data->full_name = 'No User But Used!';
 								}
 								else{
-									$data->full_name = 'Invalid ID Number Added!';
+									$data->full_name = $guest->users;
+									$data->id = 'g-'.$guest->id;
 								}
-								$data->date_time = Carbon::createFromFormat('Y-m-d H:i:s',$data->date_time)->format('m-d-y h:i:s a');
-								if (file_exists('images/'.$data->id_number.'.jpg')){
-									$data->image = $data->id_number.'.jpg';
-								}
-								else{
-									$data->image = 'avatar.png';
-								}
-								//
-								$info = $data;
-								$info->station_id = $station->station_id;
-								$station_data[] = $info;
 							}
+							else{
+								$data->full_name = 'Invalid ID Number Added!';
+							}
+							$data->date_time = Carbon::createFromFormat('Y-m-d H:i:s',$data->date_time)->format('m-d-y h:i:s a');
+							if (file_exists('images/'.$data->id_number.'.jpg')){
+								$data->image = $data->id_number.'.jpg';
+							}
+							else{
+								$data->image = 'avatar.png';
+							}
+							//
+							$info = $data;
+							$info->station_id = $station->station_id;
+							$station_data[] = $info;
 						}
-						return json_encode(array('station_data' => $station_data));
-						break;
-				}
+					}
+					return json_encode(array('station_data' => $station_data));
+					break;
 			}
 		}
 	}

@@ -11,6 +11,7 @@ use App\Models\Logs\TimeLog as TimeLog;
 use App\Models\Attendance\AttendanceStation as AttendanceStation;
 use App\Models\Attendance\AttendanceTimelog as AttendanceTimelog;
 use App\Models\Tags\Tag as Tag;
+use App\Models\Guests\Guest as Guest;
 use App\Models\Guests\GuestTag as GuestTag;
 use App\Models\Access\StationAccess as StationAccess;
 use App\Models\Guests\GuestAccess as GuestAccess;
@@ -21,6 +22,7 @@ use URL;
 use Controller;
 use Carbon\Carbon as Carbon;
 use App\Models\Prism\PrismViews as PrismViews;
+use App\Helper\Socket;
 
 class APIController extends Controller {
 
@@ -234,13 +236,14 @@ class APIController extends Controller {
 					
 				//Turnstile loging
 				case 'access_check':
-					// $status = true;
+					$status = false;
 					if (Input::has('ip') && Input::has('tag')){
 						$ip = Input::get('ip');
 						$tag_number = Input::get('tag');
 
 						$station = Station::where('ip',$ip)->first();
 						if (!is_null($station) && !empty($station)){
+							$socket_data = array();
 							//check if valid member
 							$tags = Tag::where('tag',$tag_number)->first();
 							if (!is_null($tags) && !empty($tags)){
@@ -251,12 +254,28 @@ class APIController extends Controller {
 										'station_group_id' => $station->station_group_id
 									))->get();
 									if (count($access_list) > 0){
+										$current_time = Carbon::now();
 										//add time log
 										$timelog = new TimeLog;
 										$timelog->station_id = $station->station_id;
 										$timelog->id_number = $member->id_number;
-										$timelog->date_time = Carbon::now();
+										$timelog->date_time = $current_time;
 										$timelog->save();
+
+										$img_path = 'avatar.png';
+										if (file_exists('images/'.$member->id_number.'.jpg')){
+											$img_path = $member->id_number.'.jpg';
+										}
+
+										$socket_data = array(
+											'station_id' => $station->station_id,
+											'id_number' => $member->id_number,
+											'date_time' => $current_time->format('m-d-y h:i:s a'),
+											'id' => 'm-'.$member->member_id,
+											'full_name' => $member->memberInformation->first_name.' '.$member->memberInformation->middle_name.' '.$member->memberInformation->last_name,
+											'image' => $img_path,
+										);
+
 										$status = true;
 									}
 								}
@@ -270,15 +289,58 @@ class APIController extends Controller {
 										'station_group_id' => $station->station_group_id
 									))->get();
 									if (count($access_list) > 0){
+										$current_time = Carbon::now();
+
 										//add time log
 										$timelog = new TimeLog;
 										$timelog->station_id = $station->station_id;
 										$timelog->id_number = $tags->id_number;
-										$timelog->date_time = Carbon::now();
+										$timelog->date_time = $current_time;
 										$timelog->save();
 										$status = true;
+
+										$full_name = 'No User But Used!';
+										$guest_id = '';
+
+										$guest = Guest::where('tag_id',$tags->tag_id)
+											->whereNotNull('return_date_time')
+											->where('borrow_date_time','<',$current_time)
+											->where('return_date_time','>',$current_time)
+											->orderBy('borrow_date_time','desc')
+											->first();
+										if (empty($guest)){
+											$guest = Guest::where('tag_id',$tags->tag_id)
+												->whereNull('return_date_time')
+												->where('borrow_date_time','<',$current_time)
+												->orderBy('borrow_date_time','desc')
+												->first();
+										}
+
+										if (!empty($guest)){
+											$full_name = $guest->users;
+											$guest_id = 'g-'.$guest->id;
+										}
+
+										$img_path = 'avatar.png';
+										if (file_exists('images/'.$tags->id_number.'.jpg')){
+											$img_path = $tags->id_number.'.jpg';
+										}
+
+										$socket_data = array(
+											'station_id' => $station->station_id,
+											'id_number' => $tags->id_number,
+											'date_time' => $current_time->format('m-d-y h:i:s a'),
+											'id' => $guest_id,
+											'full_name' => $full_name,
+											'image' => $img_path,
+										);
+
 									}
 								}
+							}
+
+							if ($status && !empty($socket_data)){
+								Socket::sendData(json_encode($socket_data));
 							}
 						}
 					}

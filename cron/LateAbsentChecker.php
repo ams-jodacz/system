@@ -16,7 +16,6 @@
 	$minute = $minute - $minute_excess;
 	$date = $date->setTime($date->format('H'),$minute);
 
-	echo $date->format('m-d-Y h:i a');
 	if ($date->format('w') == 0 || $date->format('w') == 6){
 		die('weekend');
 	}
