@@ -4,16 +4,20 @@ use React\EventLoop\Factory;
 use React\Socket\Connector;
 use Ratchet\Client\Connector as Client;
 use Ratchet\Client\WebSocket;
+use App\Http\Controllers\Server;
 
 class Socket {
     public static function sendData($info){
+        $host = Socket::getHost();
+        $port = Socket::getPort();
+
         $loop = Factory::create();
         $reactConnector = new Connector($loop, [
             'timeout' => 0.5
         ]);
         $connector = new Client($loop, $reactConnector);
 
-        $connector('ws://localhost:9000')->then(function(WebSocket $conn) use ($info){
+        $connector('ws://'.$host.':'.$port)->then(function(WebSocket $conn) use ($info){
             $conn->send($info);
             $conn->close();
         }, function(Exception $e) use ($loop) {
@@ -21,6 +25,14 @@ class Socket {
         });
 
         $loop->run();
+    }
+
+    public static function getPort(){
+        return 9000;
+    }
+
+    public static function getHost(){
+        return 'localhost';
     }
 }
 

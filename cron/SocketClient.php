@@ -3,10 +3,12 @@ use React\EventLoop\Factory;
 use React\Socket\Connector;
 use Ratchet\Client\Connector as Client;
 use Ratchet\Client\WebSocket;
+use App\Helper\Socket;
 
 require __DIR__.'/../bootstrap/autoload.php';
 
-echo env("DB_HOST", "somedefaultvalue");
+$host = Socket::getHost();
+$port = Socket::getPort();
 
 $loop = Factory::create();
 $reactConnector = new Connector($loop, [
@@ -14,7 +16,7 @@ $reactConnector = new Connector($loop, [
 ]);
 $connector = new Client($loop, $reactConnector);
 
-$connector('ws://localhost:9000')->then(function(WebSocket $conn) {
+$connector('ws://'.$host.':'.$port)->then(function(WebSocket $conn) {
     $conn->send('Hello World!');
     $conn->close();
 }, function(Exception $e) use ($loop) {

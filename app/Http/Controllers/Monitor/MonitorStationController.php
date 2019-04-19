@@ -11,6 +11,7 @@ use Carbon\Carbon as Carbon;
 use Request;
 use Input;
 use Controller;
+use App\Helper\Socket;
 
 class MonitorStationController extends Controller {
     protected $page_module = 7;
@@ -24,7 +25,11 @@ class MonitorStationController extends Controller {
 	public function index(){
 		$this->checkModule();
 		$action_value = Permission::getPageAction($this->page_module,$this->page_id);
-		return view('content.monitor_station.monitor_station',array('action_value'=>$action_value));
+		return view('content.monitor_station.monitor_station',array(
+			'action_value'=>$action_value,
+			'port' => Socket::getPort(),
+			'host' => Socket::getHost(),
+		));
 	}
 	
 	public function view($id){

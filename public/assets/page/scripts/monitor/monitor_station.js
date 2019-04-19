@@ -3,6 +3,9 @@ var MonitorStation = function () {
     var lock_state = false;
     var interval = 2000;
 
+    var port = 0;
+    var host = 0;
+
     var initTable = function () {
         $('.select2').select2({
             allowClear: true,
@@ -76,7 +79,7 @@ var MonitorStation = function () {
 
     function initWebSocket(){
         // var path = 'ws://' + window.location.host + ':9000';
-        var path = 'ws://localhost:9000';
+        var path = 'ws://'+host+':'+port;
         // console.log(path);
         // return;
         var socket = new WebSocket(path);
@@ -119,6 +122,12 @@ var MonitorStation = function () {
         //main function to initiate the module
         init: function () {
             initTable();
+        },
+        setPort: function(ws_port){
+            port = ws_port;
+        },
+        setHost: function(ws_host){
+            host = ws_host;
         }
     };
 

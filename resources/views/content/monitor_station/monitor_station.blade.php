@@ -80,8 +80,10 @@
 
 @section('init_js')
     <script>
-        jQuery(document).ready(function() {       
-           MonitorStation.init();
+        jQuery(document).ready(function() {
+            MonitorStation.setPort({{$port}});
+            MonitorStation.setHost('{{$host}}');
+            MonitorStation.init();
         });
     </script>
 @stop
