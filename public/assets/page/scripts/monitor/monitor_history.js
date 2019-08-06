@@ -5,7 +5,7 @@ var MonitorHistory = function () {
         var oTable = table.dataTable({
             // "processing": true,
             "serverSide": true,
-            "ajax": BASE_URL + '/monitor/station/data',
+            "ajax": BASE_URL + '/monitor/history/data',
             "deferRender": true,
             "order": [],
             "pagingType": "simple",
