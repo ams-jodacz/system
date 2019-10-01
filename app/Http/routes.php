@@ -286,6 +286,15 @@ Route::group(['middleware'=>'auth','prefix' => '/'], function(){
     });
 });
 
+//monitor without permission
+Route::group(array('prefix'=> 'monitor'), function(){
+    Route::group(array('prefix'=> 'public_station'), function(){
+        Route::get('/', 'Monitor\MonitorPublic@index');
+        Route::get('view/{id}', 'Monitor\MonitorPublic@view');
+        Route::get('data', 'Monitor\MonitorPublic@data');
+    });
+});
+
 Route::match(array('get', 'post'),'login',function(){
     if (Request::isMethod('post') && Input::has('username') && Input::has('password')){
         $username = Input::get('username');
