@@ -18,6 +18,7 @@ $connector = new Client($loop, $reactConnector);
 
 $connector('ws://'.$host.':'.$port)->then(function(WebSocket $conn) {
     $conn->send('Hello World!');
+    sleep(10);
     $conn->close();
 }, function(Exception $e) use ($loop) {
     $loop->stop();
