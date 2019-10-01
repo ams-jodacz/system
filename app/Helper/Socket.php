@@ -6,7 +6,6 @@ use Ratchet\Client\Connector as Client;
 use Ratchet\Client\WebSocket;
 use App\Http\Controllers\Server;
 use URL;
-use Request;
 
 class Socket {
     public static function sendData($info){
@@ -34,7 +33,7 @@ class Socket {
     }
 
     public static function getHost(){
-        $path = Request::url();
+        $path = URL::to('/');
         $current_url = str_replace('http://','',str_replace('https://','',URL::to('/')));
         $current_url = str_replace($path,'',$current_url);
         $current_url = str_replace('public','',$current_url);
