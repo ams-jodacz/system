@@ -28,7 +28,7 @@ class MonitorStationController extends Controller {
 		return view('content.monitor_station.monitor_station',array(
 			'action_value'=>$action_value,
 			'port' => Socket::getPort(),
-			'host' => Socket::getHost(),
+			'host' => '124.83.35.180',
 		));
 	}
 	
