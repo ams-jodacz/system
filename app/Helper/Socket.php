@@ -5,7 +5,6 @@ use React\Socket\Connector;
 use Ratchet\Client\Connector as Client;
 use Ratchet\Client\WebSocket;
 use App\Http\Controllers\Server;
-use URL;
 
 class Socket {
     public static function sendData($info){
