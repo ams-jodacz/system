@@ -24,7 +24,7 @@ class MonitorPublic extends Controller {
 		$out_stations = array();
 
 		$station_id_list = array();
-		if (!empty($station_group) && isset($station_group->station) && count($station_group->station) > 0){
+		if (!empty($station_group) && count($station_group->station) > 0){
 			foreach ($station_group->station as $station) {
 				if ($station->status == 'In'){
 					$total_in++;
