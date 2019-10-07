@@ -16,15 +16,37 @@ use App\Helper\Socket;
 class MonitorPublic extends Controller {
 	
 	public function index(){
-		$station_group = Request::has('station_group')?Request::get('station_group'):0;
-		$data = StationGroup::find($station_group);
-		echo '<pre>';
-		print_r($data);
-		die();
+		$station_group_id = Request::has('station_group')?Request::get('station_group'):0;
+		$station_group = StationGroup::find($station_group_id);
+		$total_in = 0;
+		$total_out = 0;
+		$in_stations = array();
+		$out_stations = array();
+		foreach ($station_group->station as $station) {
+			if ($station->status == 'In'){
+				$total_in++;
+				$in_stations[] = $station;
+			}
+			else if ($station->status == 'Out'){
+				$total_out++;
+				$out_stations[] = $station;
+			}
+		}
+
+		// echo '<pre>';
+		// print_r($station_group->toArray());
+		// print_r($in_stations);
+		// print_r($out_stations);
+		// die();
 		return view('content.monitor_public.monitor_public',array(
-			'action_value'=> 0,
+			'school' => '',
 			'port' => Socket::getPort(),
 			'host' => Socket::getHost(),
+			'station_group' => $station_group,
+			'in_stations' => $in_stations,
+			'out_stations' => $out_stations,
+			'in_span' => $total_in > 4?3:$total_in != 0?(12/$total_in):0,
+			'out_span' => $total_out > 4?3:$total_out != 0?(12/$total_out):0,
 		));
 	}
 	

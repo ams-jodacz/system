@@ -16,72 +16,51 @@
   <body class="body">
     <div id="particles-js"></div>
     <div class="container-fluid px-5 pb-5 pt-4">
-      <h1 class="main-title">MAIN GATE</h1>
+      <h1 class="main-title">{{isset($station_group) && isset($station_group->group_name)}}</h1>
       <div class="row">
-        <div class="col-md-6 px-5 py-4">
-          <figure class="usercard">
-            <img
-              src="./assets/img/final.png"
-              class="usercard__logo img-fluid"
-            />
-            <div class="h-100 d-flex">
-              <div
-                class="usercard__avatar"
-                style="background-image: url('http://124.83.35.180/public/images/SHS-201900230.jpg')"
-              ></div>
-              <figcaption class="usercard__description">
-                <div class="usercard__description-inner">
-                  <h1 class="usercard__description-title">
-                    <span class="text-truncate d-block">Maria Elisa A.</span>
-                    <span> Ramos</span>
-                  </h1>
-                  <h3 class="usercard__description-subtitle">
-                    SHS-201900236
-                  </h3>
-
-                  <h5 class="usercard__description-label">
-                    09-27-19 11:01:38 am
-                  </h5>
-                </div>
-                <div class="usercard__footer exit">
-                  ANNEX EXIT <span>1</span>
-                </div>
-              </figcaption>
+        @foreach($in_stations as $station)
+            <div class="col-md-6 px-5 py-4">
+                <figure class="usercard">
+                    <img src="./assets/img/final.png" class="usercard__logo img-fluid"/>
+                    <div class="h-100 d-flex">
+                    <div class="usercard__avatar" style="background-image: url('http://124.83.35.180/public/images/SHS-201900230.jpg')"></div>
+                    <figcaption class="usercard__description">
+                        <div class="usercard__description-inner">
+                        <h1 class="usercard__description-title station_name_{{$station->station_id}}">
+                            <span class="text-truncate d-block">
+                                Maria Elisa A.
+                            </span>
+                            <span>
+                                Ramos
+                            </span>
+                        </h1>
+                        <h3 class="usercard__description-subtitle">
+                            SHS-201900236
+                        </h3>
+                        <h5 class="usercard__description-label">
+                            09-27-19 11:01:38 am
+                        </h5>
+                        </div>
+                        <div class="usercard__footer entrance">
+                            {{$station->name}}
+                        </div>
+                    </figcaption>
+                    </div>
+                </figure>
+                <!-- <div class="form-group">
+                    <center>
+                        <h4><label class="control-label">{{$station->name}}</label></h4>
+                        <img id="station_{{$station->station_id}}" src="{{URL::to('/')}}/images/avatar.png" height="200" width="200"/>
+                        <br/>
+                        <label id="station_number_{{$station->station_id}}">ID Number</label>
+                        <br/>
+                        <label id="station_name_{{$station->station_id}}">Name</label>
+                        <br/>
+                        <label id="station_time_{{$station->station_id}}">Date Time</label>
+                    </center>
+                </div> -->
             </div>
-          </figure>
-        </div>
-        <div class="col-md-6 px-5 py-4">
-          <figure class="usercard">
-            <img
-              src="./assets/img/final.png"
-              class="usercard__logo img-fluid"
-            />
-            <div class="h-100 d-flex">
-              <div
-                class="usercard__avatar"
-                style="background-image: url('http://124.83.35.180/public/images/201500092.jpg')"
-              ></div>
-              <figcaption class="usercard__description">
-                <div class="usercard__description-inner">
-                  <h1 class="usercard__description-title">
-                    <span class="text-truncate d-block">JON JOSHUA M</span>
-                    <span>PATDU</span>
-                  </h1>
-                  <h3 class="usercard__description-subtitle">
-                    201500092
-                  </h3>
-
-                  <h5 class="usercard__description-label">
-                    09-27-19 12:08:25 pm
-                  </h5>
-                </div>
-                <div class="usercard__footer entrance">
-                  ANNEX ENTRY 1
-                </div>
-              </figcaption>
-            </div>
-          </figure>
-        </div>
+        @endforeach
       </div>
 
       <div class="row">
