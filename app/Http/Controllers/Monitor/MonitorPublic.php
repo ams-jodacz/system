@@ -24,16 +24,18 @@ class MonitorPublic extends Controller {
 		$out_stations = array();
 
 		$station_id_list = array();
-		foreach ($station_group->station as $station) {
-			if ($station->status == 'In'){
-				$total_in++;
-				$in_stations[] = $station;
-				$station_id_list[] = $station->station_id;
-			}
-			else if ($station->status == 'Out'){
-				$total_out++;
-				$out_stations[] = $station;
-				$station_id_list[] = $station->station_id;
+		if (!empty($station_group) && isset($station_group->station) && count($station_group->station) > 0){
+			foreach ($station_group->station as $station) {
+				if ($station->status == 'In'){
+					$total_in++;
+					$in_stations[] = $station;
+					$station_id_list[] = $station->station_id;
+				}
+				else if ($station->status == 'Out'){
+					$total_out++;
+					$out_stations[] = $station;
+					$station_id_list[] = $station->station_id;
+				}
 			}
 		}
 
