@@ -16,56 +16,38 @@ use App\Helper\Socket;
 class MonitorPublic extends Controller {
 	
 	public function index(){
-		$station_group = Request::has('station_group')?Request::get('station_group'):0;
-		$data = StationGroup::find($station_group);
-		echo '<pre>';
-		print_r($data);
-		die();
+		$station_group_id = Request::has('station_group')?Request::get('station_group'):0;
+		$station_group = StationGroup::find($station_group_id);
+		$total_in = 0;
+		$total_out = 0;
+		$in_stations = array();
+		$out_stations = array();
+
+		$station_id_list = array();
+		foreach ($station_group->station as $station) {
+			if ($station->status == 'In'){
+				$total_in++;
+				$in_stations[] = $station;
+				$station_id_list[] = $station->station_id;
+			}
+			else if ($station->status == 'Out'){
+				$total_out++;
+				$out_stations[] = $station;
+				$station_id_list[] = $station->station_id;
+			}
+		}
+
 		return view('content.monitor_public.monitor_public',array(
-			'action_value'=> 0,
+			'school' => '',
 			'port' => Socket::getPort(),
 			'host' => Socket::getHost(),
+			'station_ids' => $station_id_list,
+			'station_group' => $station_group,
+			'in_stations' => $in_stations,
+			'out_stations' => $out_stations,
+			'in_span' => $total_in > 4?3:$total_in != 0?(12/$total_in):0,
+			'out_span' => $total_out > 4?3:$total_out != 0?(12/$total_out):0,
 		));
-	}
-	
-	public function view($id){
-		if (Input::has('classType')){
-			$classType = Input::get('classType');
-			switch ($classType) {
-				case 'tags':
-					if (Input::has('guest_group_id')){
-						$guest_group_id = Input::get('guest_group_id');
-						$guest = Guest::where('return_date_time','=',null)->get(array('tag_id'));
-						$guest_tags = GuestTag::where('guest_group_id',$guest_group_id)->whereNotIn('tag_id',$guest->toArray())->get();
-						$data = array();
-						foreach ($guest_tags as $guest_tag) {
-							$data[] = array(
-								'id' => $guest_tag->tag_id,
-								'text' => $guest_tag->tag_name
-							);
-						}
-						return json_encode($data);
-					}
-					break;
-			}
-		}
-		if ($id != '0'){
-			$format = explode('-', $id);
-			if (count($format) < 2){
-				return view('common.invalid_modal',array('msg' => 'Invalid id number format!'));
-			}
-			$id = $format[1];
-			$id_format = $format[0];
-			if ($id_format == 'm' && Member::find($id)){
-				$member = Member::find($id);
-				return view('content.member.modal.member_info',array('member_info' => $member));
-			}
-			else if ($id_format == 'g' && Guest::find($id)){
-				$guest = Guest::find($id);
-				return view('content.guest.modal.guest_log_info',array('guest_log_info' => $guest));
-			}
-		}
-		return view('common.invalid_modal',array('msg' => 'Unable to find data!'));
 	}
 
 	public function data(){
@@ -75,39 +57,10 @@ class MonitorPublic extends Controller {
 			$type = Input::get('type');
 
 			switch ($type) {
-				case 'station_count':
-					$station_group = StationGroup::find($group_id);
-					$total_in = 0;
-					$total_out = 0;
-					$in_stations = array();
-					$out_stations = array();
-					if (!is_null($station_group) && !empty($station_group)){
-						foreach ($station_group->station as $station) {
-							if ($station->status == 'In'){
-								$total_in++;
-								$in_stations[] = $station;
-							}
-							else if ($station->status == 'Out'){
-								$total_out++;
-								$out_stations[] = $station;
-							}
-						}
-					}
-
-					return json_encode(array(
-						'view' => view('content.monitor_station.monitor_station_profile',
-							array(
-								'in_stations' => $in_stations,
-								'out_stations' => $out_stations,
-								'in_span' => $total_in > 4?3:$total_in != 0?(12/$total_in):0,
-								'out_span' => $total_out > 4?3:$total_out != 0?(12/$total_out):0,
-							)
-						)->render(),
-					));
-					break;
 				case 'station_profile':
 					$station_group = StationGroup::find($group_id);
 					$station_data = array();
+					$current_time = Carbon::now();
 					if (!is_null($station_group) && !empty($station_group)){
 						foreach ($station_group->station as $station) {
 							$data = $station->timeLogs()->orderBy('date_time','desc')->first();
@@ -147,7 +100,9 @@ class MonitorPublic extends Controller {
 							else{
 								$data->full_name = 'Invalid ID Number Added!';
 							}
-							$data->date_time = Carbon::createFromFormat('Y-m-d H:i:s',$data->date_time)->format('m-d-y h:i:s a');
+							$data_data_time = Carbon::createFromFormat('Y-m-d H:i:s',$data->date_time);
+							$data->date_time = $data_data_time->format('m-d-y h:i:s a');
+							$data->time_diff = $current_time->diffInMinutes($data_data_time);
 							if (file_exists('images/'.$data->id_number.'.jpg')){
 								$data->image = $data->id_number.'.jpg';
 							}
