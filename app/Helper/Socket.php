@@ -32,12 +32,13 @@ class Socket {
     }
 
     public static function getHost(){
-        // $path = URL::to('/');
-        // $current_url = str_replace('http://','',str_replace('https://','',URL::to('/')));
-        // $current_url = str_replace($path,'',$current_url);
-        // $current_url = str_replace('public','',$current_url);
-        // $current_url = str_replace('/','',$current_url);
-        $current_url = 'localhost';
+        $path = URL::to('/');
+        $current_url = str_replace('http://','',str_replace('https://','',URL::to('/')));
+        $current_url = str_replace($path,'',$current_url);
+        $current_url = str_replace('public','',$current_url);
+        $current_url = str_replace('/','',$current_url);
+        $current_url = str_replace('ams','',$current_url);
+        // $current_url = 'localhost';
         return $current_url;
     }
 }

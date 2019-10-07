@@ -16,8 +16,13 @@ use App\Helper\Socket;
 class MonitorPublic extends Controller {
 	
 	public function index(){
-		return view('content.monitor_station.monitor_station',array(
-			'action_value'=>$action_value,
+		$station_group = Request::has('station_group')?Request::get('station_group'):0;
+		$data = StationGroup::find($station_group);
+		echo '<pre>';
+		print_r($data);
+		die();
+		return view('content.monitor_public.monitor_public',array(
+			'action_value'=> 0,
 			'port' => Socket::getPort(),
 			'host' => Socket::getHost(),
 		));
