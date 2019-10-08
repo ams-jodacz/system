@@ -208,7 +208,7 @@ var MonitorPublic = function () {
             }
             else{
                 // $('.station_' + info.station_id).attr('src', BASE_URL + '/images/' + info.image);
-                $('.station_' + station_id).css('background-image', 'url(' + BASE_URL + '/images/' + info.image + ')');
+                $('.station_' + info.station_id).css('background-image', 'url(' + BASE_URL + '/images/' + info.image + ')');
                 $('.station_number_' + info.station_id).text("");
                 $('.station_number_' + info.station_id).text(info.id_number);
                 $('.station_name_' + info.station_id).text("");
