@@ -22,7 +22,7 @@
         @foreach($in_stations as $station)
             <div class="col-md-6 px-5 py-4">
                 <figure class="usercard">
-                    <img src="./assets/img/final.png" class="usercard__logo img-fluid"/>
+                    <img src="{{URL::to('/')}}/final.png" class="usercard__logo img-fluid"/>
                     <div class="h-100 d-flex">
                     <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/avatar.png')"></div>
                     <figcaption class="usercard__description">
@@ -53,7 +53,7 @@
         @foreach($out_stations as $station)
           <div class="col-md-6 px-5 py-4">
               <figure class="usercard">
-                  <img src="./assets/img/final.png" class="usercard__logo img-fluid"/>
+                  <img src="{{URL::to('/')}}/final.png" class="usercard__logo img-fluid"/>
                   <div class="h-100 d-flex">
                   <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/avatar.png')"></div>
                   <figcaption class="usercard__description">
