@@ -24,7 +24,7 @@
                 <figure class="usercard">
                     <img src="./assets/img/final.png" class="usercard__logo img-fluid"/>
                     <div class="h-100 d-flex">
-                    <div class="usercard__avatar" style="background-image: url('{{URL::to('/')}}/images/avatar.png')"></div>
+                    <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/avatar.png')"></div>
                     <figcaption class="usercard__description">
                         <div class="usercard__description-inner">
                         <h1 class="usercard__description-title">
@@ -55,7 +55,7 @@
               <figure class="usercard">
                   <img src="./assets/img/final.png" class="usercard__logo img-fluid"/>
                   <div class="h-100 d-flex">
-                  <div class="usercard__avatar" style="background-image: url('{{URL::to('/')}}/images/avatar.png')"></div>
+                  <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/avatar.png')"></div>
                   <figcaption class="usercard__description">
                       <div class="usercard__description-inner">
                       <h1 class="usercard__description-title">

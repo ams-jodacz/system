@@ -207,7 +207,8 @@ var MonitorPublic = function () {
                 clearRenderData(info.station_id);
             }
             else{
-                $('.station_' + info.station_id).attr('src', BASE_URL + '/images/' + info.image);
+                // $('.station_' + info.station_id).attr('src', BASE_URL + '/images/' + info.image);
+                $('.station_' + station_id).css('background-image', 'url(' + BASE_URL + '/images/' + info.image + ')');
                 $('.station_number_' + info.station_id).text("");
                 $('.station_number_' + info.station_id).text(info.id_number);
                 $('.station_name_' + info.station_id).text("");
@@ -220,7 +221,8 @@ var MonitorPublic = function () {
 
     function clearRenderData(station_id){
         console.log('clear interval '+station_id);
-        $('.station_' + station_id).attr('src', BASE_URL + '/images/avatar.png');
+        // $('.station_' + station_id).attr('src', BASE_URL + '/images/avatar.png');
+        $('.station_' + station_id).css('background-image', 'url('+BASE_URL + '/images/avatar.png'+')');
         $('.station_number_' + station_id).text("");
         $('.station_name_' + station_id).text("");
         $('.station_time_' + station_id).text("");
