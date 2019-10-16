@@ -17,6 +17,11 @@ var MonitorPublic = function () {
         jQuery(".usercard__description-label").fitText(1);
         jQuery(".usercard__footer").fitText(2.5, { minFontSize: '20px' });
         
+        jQuery(".usercard-responsive").find('.usercard__description-subtitle').fitText(2);
+        jQuery(".usercard-responsive").find('.usercard__description-title').fitText(1);
+        jQuery(".usercard-responsive").find('.usercard__description-label').fitText(1.5);
+        jQuery(".usercard-responsive").find('.usercard__footer').fitText(1);
+
         // ParticlesJS Config.
         particlesJS("particles-js", {
             "particles": {
