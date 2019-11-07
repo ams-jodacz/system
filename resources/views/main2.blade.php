@@ -46,124 +46,126 @@
     </head>
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
-    <body class="page-header-fixed page-quick-sidebar-over-content page-style-square page-footer-fixed"> 
-        <!-- BEGIN HEADER -->
-        <div class="page-header navbar navbar-fixed-top">
-                <!-- BEGIN HEADER INNER -->
-                <div class="page-header-inner">
-                        <!-- BEGIN LOGO -->
-                        <div class="page-logo">
-                                <a href="{{URL::to('/')}}">
-                                    <!--<img src="{{URL::to('/')}}/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>-->
-                                </a>
-                        </div>
-                        <!-- END LOGO -->
-                        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-                        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                        </a>
-                        <!-- END RESPONSIVE MENU TOGGLER -->
-                        <!-- BEGIN TOP NAVIGATION MENU -->
-                        <div class="top-menu">
-                                <ul class="nav navbar-nav pull-right">
-                                    <!-- BEGIN NOTIFICATION DROPDOWN -->
-                                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                                    <!-- include('common.nav_tools.notification') -->
-                                    <!-- END NOTIFICATION DROPDOWN -->
-                                    
-                                    <!-- BEGIN INBOX DROPDOWN -->
-                                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                                    <!-- include('common.nav_tools.message') -->
-                                    <!-- END INBOX DROPDOWN -->
-                                    
-                                    <!-- BEGIN TODO DROPDOWN -->
-                                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                                    <!-- include('common.nav_tools.task') -->
-                                    <!-- END TODO DROPDOWN -->
-                                    
-                                    <!-- BEGIN USER LOGIN DROPDOWN -->
-                                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                                    @include('common.nav_tools.settings')
-                                    <!-- END USER LOGIN DROPDOWN -->
-                                </ul>
-                        </div>
-                        <!-- END TOP NAVIGATION MENU -->
-                </div>
-                <!-- END HEADER INNER -->
-        </div>
-        <!-- END HEADER -->
-        <div class="clearfix">
-        </div>
+    <body class="page-main page-header-fixed page-quick-sidebar-over-content page-style-square"> 
+ 
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar-wrapper">
-                    <div class="page-sidebar navbar-collapse collapse">
-                            <!-- BEGIN SIDEBAR MENU -->
-                            <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-                            <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-                            <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-                            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                            <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-                            <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-                            <ul class="page-sidebar-menu" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
-                                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-                                    <li class="sidebar-toggler-wrapper">
-                                            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                                            <div class="sidebar-toggler">
-                                            </div>
-                                            <!-- END SIDEBAR TOGGLER BUTTON -->
-                                    </li>
-                                    <br/>
-                                    @include('common.nav3')
-                            </ul>
-                            <!-- END SIDEBAR MENU -->
-                    </div>
+				<div class="page-sidebar navbar-collapse collapse">
+						<!-- BEGIN SIDEBAR MENU -->
+						<!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+						<!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+						<!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+						<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+						<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+						<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+						<ul class="page-sidebar-menu" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
+								<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+								<li class="sidebar-toggler-wrapper">
+										<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+										<div class="sidebar-toggler">
+										</div>
+										<!-- END SIDEBAR TOGGLER BUTTON -->
+								</li>
+								<br/>
+								@include('common.nav3')
+						</ul>
+						<!-- END SIDEBAR MENU -->
+				</div>
+
+				<!-- BEGIN FOOTER -->
+				<div class="page-footer">
+					<div class="page-footer-inner">
+						2014 &copy; Agent 5.
+					</div>
+					<div class="scroll-to-top">
+							<i class="icon-arrow-up"></i>
+					</div>
+				</div>
+				<!-- END FOOTER -->
             </div>
             <!-- END SIDEBAR -->
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
-                    <div class="page-content">
-                            <!-- BEGIN PAGE HEADER-->
-                            <h3 class="page-title">
-                                @yield('page_header')
-                            </h3>
-                            <div class="page-bar">
-                                    <ul class="page-breadcrumb">
-                                            <li>
-                                                    <i class="fa fa-home"></i>
-                                                    <a href="{{URL::to('/')}}">Home</a>
-                                                    <i class="fa fa-angle-right"></i>
-                                            </li>
-                                            @yield('breadcrumb')
-                                    </ul>
-                            </div>
-                            <!-- END PAGE HEADER-->
-                            @yield('content')
-                            <!--Modal Start-->
-                            <div id="loading_indicator" style="display:none">
-                                <div class="page-loading page-loading-boxed">
-                                    <img src="{{URL::to('/')}}/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
-                                    <span>
-                                        &nbsp;&nbsp;Loading...
-                                    </span>
-                                </div>
-                            </div>
-                            <!--Modal End-->
-                    </div>
+				<!-- BEGIN HEADER -->
+				<div class="page-header navbar">
+					<!-- BEGIN HEADER INNER -->
+
+					<div class="page-header-inner">
+							<!-- BEGIN LOGO -->
+							<div class="page-logo">
+									<a href="{{URL::to('/')}}">
+											<!--<img src="{{URL::to('/')}}/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>-->
+									</a>
+							</div>
+							<!-- END LOGO -->
+							<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+							<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+							</a>
+							<!-- END RESPONSIVE MENU TOGGLER -->
+							<!-- BEGIN TOP NAVIGATION MENU -->
+							<div class="top-menu">
+									<ul class="nav navbar-nav pull-right">
+											<!-- BEGIN NOTIFICATION DROPDOWN -->
+											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+											<!-- include('common.nav_tools.notification') -->
+											<!-- END NOTIFICATION DROPDOWN -->
+											
+											<!-- BEGIN INBOX DROPDOWN -->
+											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+											<!-- include('common.nav_tools.message') -->
+											<!-- END INBOX DROPDOWN -->
+											
+											<!-- BEGIN TODO DROPDOWN -->
+											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+											<!-- include('common.nav_tools.task') -->
+											<!-- END TODO DROPDOWN -->
+											
+											<!-- BEGIN USER LOGIN DROPDOWN -->
+											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+											@include('common.nav_tools.settings')
+											<!-- END USER LOGIN DROPDOWN -->
+									</ul>
+							</div>
+							<!-- END TOP NAVIGATION MENU -->
+					</div>
+					<!-- END HEADER INNER -->
+				</div>
+				<!-- END HEADER -->
+
+                <div class="page-content">
+					<!-- BEGIN PAGE HEADER-->
+					<h3 class="page-title">
+					@yield('page_header')
+					</h3>
+					<div class="page-bar">
+						<ul class="page-breadcrumb">
+								<li>
+										<i class="fa fa-home"></i>
+										<a href="{{URL::to('/')}}">Home</a>
+										<i class="fa fa-angle-right"></i>
+								</li>
+								@yield('breadcrumb')
+						</ul>
+					</div>
+					<!-- END PAGE HEADER-->
+					@yield('content')
+					<!--Modal Start-->
+					<div id="loading_indicator" style="display:none">
+						<div class="page-loading page-loading-boxed">
+							<img src="{{URL::to('/')}}/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+							<span>
+							&nbsp;&nbsp;Loading...
+							</span>
+						</div>
+					</div>
+					<!--Modal End-->
+                </div>
             </div>
             <!-- END CONTENT -->
         </div>
         <!-- END CONTAINER -->
-        <!-- BEGIN FOOTER -->
-        <div class="page-footer">
-                <div class="page-footer-inner">
-                    2014 &copy; Agent 5.
-                </div>
-                <div class="scroll-to-top">
-                        <i class="icon-arrow-up"></i>
-                </div>
-        </div>
-        <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         
         <!-- BEGIN CORE PLUGINS -->
