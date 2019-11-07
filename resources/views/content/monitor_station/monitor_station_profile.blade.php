@@ -11,18 +11,16 @@
                 <h3 class="form-section">In Nodes</h3>
                 <div class="row">
                     @foreach($in_stations as $station)
-                        <div class="col-md-{{$in_span}}">
+                        <div class="col-md-{{$in_span}} text-center">
                             <div class="form-group">
-                                <center>
                                     <h4><label class="control-label">{{$station->name}}</label></h4>
-                                    <img id="station_{{$station->station_id}}" src="{{URL::to('/')}}/images/avatar.png" height="200" width="200"/>
+                                    <img class="img-responsive center-block" id="station_{{$station->station_id}}" src="{{URL::to('/')}}/images/gender.jpg"/ width="300  ">
                                     <br/>
                                     <label id="station_number_{{$station->station_id}}">ID Number</label>
                                     <br/>
                                     <label id="station_name_{{$station->station_id}}">Name</label>
                                     <br/>
                                     <label id="station_time_{{$station->station_id}}">Date Time</label>
-                                </center>
                             </div>
                         </div>
                     @endforeach

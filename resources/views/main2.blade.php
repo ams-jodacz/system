@@ -51,7 +51,7 @@
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
-            <div class="page-sidebar-wrapper">
+            <div class="page-sidebar-wrapper page-sidebar-fix">
 				<div class="page-sidebar navbar-collapse collapse">
 						<!-- BEGIN SIDEBAR MENU -->
 						<!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->

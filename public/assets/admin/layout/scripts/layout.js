@@ -42,7 +42,7 @@ var Layout = function () {
                     height = Metronic.getViewPort().height - headerHeight - footerHeight;
                 }
             }
-            content.attr('style', 'min-height:' + height + 'px');
+            // content.attr('style', 'min-height:' + height + 'px');
         }
     };
 
@@ -375,8 +375,10 @@ var Layout = function () {
 
             if (sidebarMenu.hasClass('page-sidebar-menu-closed')) {
                 footer.removeClass('hide');
+                $('.page-content-wrapper').removeAttr("style");
             } else {
                 footer.addClass('hide');
+                $('.page-content-wrapper').css('margin-left', '45px');
             }
 
             if (body.hasClass("page-sidebar-closed")) {
