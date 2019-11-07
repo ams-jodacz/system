@@ -47,7 +47,6 @@
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
     <body class="page-main page-header-fixed page-quick-sidebar-over-content page-style-square"> 
- 
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
@@ -91,12 +90,11 @@
 				<!-- BEGIN HEADER -->
 				<div class="page-header navbar">
 					<!-- BEGIN HEADER INNER -->
-
 					<div class="page-header-inner">
 							<!-- BEGIN LOGO -->
 							<div class="page-logo">
 									<a href="{{URL::to('/')}}">
-											<!--<img src="{{URL::to('/')}}/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>-->
+										<!--<img src="{{URL::to('/')}}/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>-->
 									</a>
 							</div>
 							<!-- END LOGO -->
@@ -107,25 +105,25 @@
 							<!-- BEGIN TOP NAVIGATION MENU -->
 							<div class="top-menu">
 									<ul class="nav navbar-nav pull-right">
-											<!-- BEGIN NOTIFICATION DROPDOWN -->
-											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-											<!-- include('common.nav_tools.notification') -->
-											<!-- END NOTIFICATION DROPDOWN -->
-											
-											<!-- BEGIN INBOX DROPDOWN -->
-											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-											<!-- include('common.nav_tools.message') -->
-											<!-- END INBOX DROPDOWN -->
-											
-											<!-- BEGIN TODO DROPDOWN -->
-											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-											<!-- include('common.nav_tools.task') -->
-											<!-- END TODO DROPDOWN -->
-											
-											<!-- BEGIN USER LOGIN DROPDOWN -->
-											<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-											@include('common.nav_tools.settings')
-											<!-- END USER LOGIN DROPDOWN -->
+										<!-- BEGIN NOTIFICATION DROPDOWN -->
+										<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+										<!-- include('common.nav_tools.notification') -->
+										<!-- END NOTIFICATION DROPDOWN -->
+										
+										<!-- BEGIN INBOX DROPDOWN -->
+										<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+										<!-- include('common.nav_tools.message') -->
+										<!-- END INBOX DROPDOWN -->
+										
+										<!-- BEGIN TODO DROPDOWN -->
+										<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+										<!-- include('common.nav_tools.task') -->
+										<!-- END TODO DROPDOWN -->
+										
+										<!-- BEGIN USER LOGIN DROPDOWN -->
+										<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+										@include('common.nav_tools.settings')
+										<!-- END USER LOGIN DROPDOWN -->
 									</ul>
 							</div>
 							<!-- END TOP NAVIGATION MENU -->

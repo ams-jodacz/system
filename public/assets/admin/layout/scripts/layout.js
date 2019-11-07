@@ -369,15 +369,8 @@ var Layout = function () {
         // handle sidebar show/hide
         $('body').on('click', '.sidebar-toggler', function (e) {
             var sidebar = $('.page-sidebar');
-            var footer = $('.page-footer');
             var sidebarMenu = $('.page-sidebar-menu');
             $(".sidebar-search", sidebar).removeClass("open");
-
-            if (sidebarMenu.hasClass('page-sidebar-menu-closed')) {
-                footer.removeClass('hide');
-            } else {
-                footer.addClass('hide');
-            }
 
             if (body.hasClass("page-sidebar-closed")) {
                 body.removeClass("page-sidebar-closed");
