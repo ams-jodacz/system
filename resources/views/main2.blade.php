@@ -61,12 +61,6 @@
 					<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 					<ul class="page-sidebar-menu" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
 							<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-							<li class="sidebar-toggler-wrapper">
-								<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-								<div class="sidebar-toggler"></div>
-								<!-- END SIDEBAR TOGGLER BUTTON -->
-							</li>
-							<br/>
 							@include('common.nav3')
 					</ul>
 					<!-- END SIDEBAR MENU -->
@@ -88,13 +82,14 @@
             <div class="page-content-wrapper">
 				<!-- BEGIN HEADER -->
 				<div class="page-header navbar">
-					<!-- BEGIN LOGO -->
-					<div class="page-logo">
-							<a href="{{URL::to('/')}}">
-									<!--<img src="{{URL::to('/')}}/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>-->
-							</a>
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<div class="sidebar-toggler">
+						<div class="hamburger-box">
+							<div class="hamburger-inner"></div>
+						</div>
 					</div>
-					<!-- END LOGO -->
+					<!-- END SIDEBAR TOGGLER BUTTON -->
+
 					<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 					<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
 					</a>

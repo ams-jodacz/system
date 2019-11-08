@@ -830,12 +830,6 @@ Page sidebar
   margin-right: -100%;
 }
 
-.page-sidebar-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
 /* Page Sidebar */
 .page-sidebar,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover {
