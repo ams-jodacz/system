@@ -16,68 +16,63 @@
 @stop
 
 @section('page_header')
-    Holiday Form
+    Holiday
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
-                Holiday Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">Holiday Form</h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="holiday_form">
                 <div class="form-body">
-                        <h3 class="form-section">Holiday</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Name</label>
-                                    {!!
-                                        Form::text('name',isset($holiday_data)?$holiday_data->name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'name',
-                                            'placeholder'=>'Name',
-                                        ))
-                                    !!}
-                                    @if (isset($holiday_data))
-                                        <input type="hidden" id="sms_prefix_id" value="{{$holiday_data->sms_prefix_id}}" />
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Date</label>
-                                    {!!
-                                        Form::text('date',isset($holiday_data)?$holiday_data->date:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'date',
-                                            'placeholder'=>'Date',
-                                            'readonly' => 'readonly',
-                                        ))
-                                    !!}
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                {!!
+                                    Form::text('name',isset($holiday_data)?$holiday_data->name:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'name',
+                                        'placeholder'=>'Name',
+                                    ))
+                                !!}
+                                @if (isset($holiday_data))
+                                    <input type="hidden" id="sms_prefix_id" value="{{$holiday_data->sms_prefix_id}}" />
+                                @endif
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label">Description</label>
-                                    {!!
-                                        Form::text('description',isset($holiday_data)?$holiday_data->description:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'description',
-                                            'placeholder'=>'Description',
-                                        ))
-                                    !!}
-                                </div>                                
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Date</label>
+                                {!!
+                                    Form::text('date',isset($holiday_data)?$holiday_data->date:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'date',
+                                        'placeholder'=>'Date',
+                                        'readonly' => 'readonly',
+                                    ))
+                                !!}
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Description</label>
+                                {!!
+                                    Form::text('description',isset($holiday_data)?$holiday_data->description:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'description',
+                                        'placeholder'=>'Description',
+                                    ))
+                                !!}
+                            </div>                                
+                        </div>
+                    </div>
                 </div>
                 <div class="form-actions right">
                         <a class=" btn default" href="{{URL::to('blast/holiday')}}">

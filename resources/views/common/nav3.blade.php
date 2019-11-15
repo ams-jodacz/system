@@ -9,7 +9,7 @@
             @if (count($permissions) > 1)
                 <li>
                     <a href="javascript:;">
-                        <i class="icon-puzzle"></i>
+                        <i class="icon-folder"></i>
                         <span class="title">
                             {{$permissions[0]->module->module_name}}
                         </span>
@@ -19,6 +19,7 @@
                         @foreach($permissions as $permission)
                         <li>
                             <a href="{{URL::to($permission->page->page_url)}}">
+                                <i class="icon-folder-alt"></i>
                                 {{$permission->page->page_name}}
                             </a>
                         </li>
@@ -29,7 +30,7 @@
                 @foreach($permissions as $permission)
                 <li>
                     <a href="{{URL::to($permission->page->page_url)}}">
-                        <i class="icon-puzzle"></i>
+                        <i class="icon-folder"></i>
                         <span class="title">
                             {{$permission->module->module_name.'-'.$permission->page->page_name}}
                         </span>

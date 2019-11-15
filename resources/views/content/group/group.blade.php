@@ -22,16 +22,20 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        Group List
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4 class="card-description">
+                                Group List
+                            </h4>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="pull-right">
+                                @include('common.button',array('base_url'=>'users/group','base_id'=>'group','buttons'=>array('add'),'action_value'=>$action_value))
+                            </div>
+                        </div>
                     </div>
-                    <div class="actions">
-                        @include('common.button',array('base_url'=>'users/group','base_id'=>'group','buttons'=>array('add'),'action_value'=>$action_value))
-                    </div>
-                </div>
-                <div class="portlet-body">
                     <table class="table table-striped table-bordered table-hover" id="group_list_table">
                         <thead>
                             <tr>

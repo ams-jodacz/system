@@ -361,27 +361,23 @@ var Layout = function () {
     // Hanles sidebar toggler
     var handleSidebarToggler = function () {
         var body = $('body');
+
         if ($.cookie && $.cookie('sidebar_closed') === '1' && Metronic.getViewPort().width >= 992) {
-            $('body').addClass('page-sidebar-closed');
+            // $('body').addClass('page-sidebar-closed');
             $('.page-sidebar-menu').addClass('page-sidebar-menu-closed');
         }
 
         // handle sidebar show/hide
         $('body').on('click', '.sidebar-toggler', function (e) {
             var sidebar = $('.page-sidebar');
-            var footer = $('.page-footer');
             var sidebarMenu = $('.page-sidebar-menu');
             $(".sidebar-search", sidebar).removeClass("open");
 
-            if (sidebarMenu.hasClass('page-sidebar-menu-closed')) {
-                footer.removeClass('hide');
-                $('.page-content-wrapper').removeAttr("style");
-                $('.sidebar-toggler').removeClass('is-active');
-            } else {
-                footer.addClass('hide');
-                $('.page-content-wrapper').css('margin-left', '45px');
-                $('.sidebar-toggler').addClass('is-active');
-            }
+            // if (sidebarMenu.hasClass('page-sidebar-menu-closed')) {
+            //     $('.sidebar-toggler').removeClass('is-active');
+            // } else {
+            //     $('.sidebar-toggler').addClass('is-active');
+            // }
 
             if (body.hasClass("page-sidebar-closed")) {
                 body.removeClass("page-sidebar-closed");
@@ -540,7 +536,13 @@ var Layout = function () {
             }
         }
     };
-    //* END:CORE HANDLERS *//
+
+    var handlePrintData = function () {
+        $('#print-dtr').click(function () {
+            $('#print').printThis();
+        });
+    }
+    //* END:CORE HANDLERS *// 
 
     return {
         // Main init methods to initialize the layout
@@ -570,6 +572,7 @@ var Layout = function () {
         initContent: function () {
             handle100HeightContent(); // handles 100% height elements(block, portlet, etc)
             handleTabs(); // handle bootstrah tabs
+            handlePrintData();
 
             Metronic.addResizeHandler(handleSidebarAndContentHeight); // recalculate sidebar & content height on window resize
             Metronic.addResizeHandler(handle100HeightContent); // reinitialize content height on window resize 

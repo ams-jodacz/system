@@ -20,45 +20,40 @@
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
-                Station Group Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">Station Group Form</h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="stations_group_form">
                 <div class="form-body">
-                        <h3 class="form-section">Station Group Form</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Station Group Name</label>
-                                    {!!
-                                        Form::text('group_name',isset($station_group_data)?$station_group_data->group_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'group_name',
-                                            'placeholder'=>'Station Group Name',
-                                        ))
-                                    !!}
-                                    @if (isset($station_group_data))
-                                        <input type="hidden" id="station_group_id" value="{{$station_group_data->station_group_id}}" />
-                                    @endif
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Station Group Name</label>
+                                {!!
+                                    Form::text('group_name',isset($station_group_data)?$station_group_data->group_name:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'group_name',
+                                        'placeholder'=>'Station Group Name',
+                                    ))
+                                !!}
+                                @if (isset($station_group_data))
+                                    <input type="hidden" id="station_group_id" value="{{$station_group_data->station_group_id}}" />
+                                @endif
                             </div>
                         </div>
+                    </div>
                 </div>
                 <div class="form-actions right">
-                        <a class=" btn default" href="{{URL::to('stations/group')}}">
-                            Back
-                        </a>
-                        @if (!isset($station_group_data))
-                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>Save</button>
-                        @else
-                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>Update</button>
-                        @endif
+                    <a class=" btn default" href="{{URL::to('stations/group')}}">
+                        Back
+                    </a>
+                    @if (!isset($station_group_data))
+                    <button type="submit" class="btn blue"><i class="fa fa-check"></i>Save</button>
+                    @else
+                    <button type="submit" class="btn blue"><i class="fa fa-check"></i>Update</button>
+                    @endif
                 </div>
             </form>
             <!-- END FORM-->

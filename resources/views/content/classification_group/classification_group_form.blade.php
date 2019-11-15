@@ -16,53 +16,50 @@
 @stop
 
 @section('page_header')
-    Classifications Group
+    Classification Group
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">
                 Classification Group Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+            </h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="classification_group_form">
                 <div class="form-body">
-                        <h3 class="form-section">Classification Group Form</h3>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label">Classification</label>
-                                    <select id="class_id" name="class_id" class="select2 form-control" data-placeholder="Choose a Classification" tabindex="1">
-                                        @foreach(App\Models\Classification\Classification::all() as $classification)
-                                            @if (isset($classification_group_data) && ($classification->class_id == $classification_group_data->class_id))
-                                            <option selected="selected" value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
-                                            @else
-                                            <option value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label">Group Name</label>
-                                    {!!
-                                        Form::text('group_name',isset($classification_group_data)?$classification_group_data->group_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'group_name',
-                                            'placeholder'=>'Group Name',
-                                        ))
-                                    !!}
-                                    @if (isset($classification_group_data))
-                                        <input type="hidden" id="class_group_id" value="{{$classification_group_data->class_group_id}}" />
-                                    @endif
-                                </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">Classification</label>
+                                <select id="class_id" name="class_id" class="select2 form-control" data-placeholder="Choose a Classification" tabindex="1">
+                                    @foreach(App\Models\Classification\Classification::all() as $classification)
+                                        @if (isset($classification_group_data) && ($classification->class_id == $classification_group_data->class_id))
+                                        <option selected="selected" value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
+                                        @else
+                                        <option value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">Group Name</label>
+                                {!!
+                                    Form::text('group_name',isset($classification_group_data)?$classification_group_data->group_name:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'group_name',
+                                        'placeholder'=>'Group Name',
+                                    ))
+                                !!}
+                                @if (isset($classification_group_data))
+                                    <input type="hidden" id="class_group_id" value="{{$classification_group_data->class_group_id}}" />
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-actions right">
                         <a class=" btn default" href="{{URL::to('classification/group')}}">

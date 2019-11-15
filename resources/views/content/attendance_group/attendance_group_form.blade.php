@@ -20,35 +20,32 @@
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">
                 Attendance Group Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+            </h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="attendance_group_form">
                 <div class="form-body">
-                        <h3 class="form-section">Attendance Group Form</h3>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label">Group Name</label>
-                                    {!!
-                                        Form::text('group_name',isset($attendance_group_data)?$attendance_group_data->group_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'group_name',
-                                            'placeholder'=>'Group Name',
-                                        ))
-                                    !!}
-                                    @if (isset($attendance_group_data))
-                                        <input type="hidden" id="attendance_group_id" value="{{$attendance_group_data->attendance_group_id}}" />
-                                    @endif
-                                </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">Group Name</label>
+                                {!!
+                                    Form::text('group_name',isset($attendance_group_data)?$attendance_group_data->group_name:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'group_name',
+                                        'placeholder'=>'Group Name',
+                                    ))
+                                !!}
+                                @if (isset($attendance_group_data))
+                                    <input type="hidden" id="attendance_group_id" value="{{$attendance_group_data->attendance_group_id}}" />
+                                @endif
                             </div>
                         </div>
+                    </div>
                 </div>
                 <div class="form-actions right">
                         <a class=" btn default" href="{{URL::to('attendance/group')}}">
@@ -64,6 +61,7 @@
             <!-- END FORM-->
         </div>
     </div>
+
     <!--Modal Start-->
     <div class="modal fade" id="loading_image" role="basic" aria-hidden="true">
         <div class="page-loading page-loading-boxed">

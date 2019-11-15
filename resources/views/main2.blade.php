@@ -34,9 +34,11 @@
         
         <!-- BEGIN THEME STYLES -->
         <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
         <link href="{{URL::to('/')}}/assets/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>
         <link href="{{URL::to('/')}}/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
         <link href="{{URL::to('/')}}/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="{{URL::to('/')}}/assets/admin/layout/css/simplebar.css" rel="stylesheet" type="text/css"/>
         <link href="{{URL::to('/')}}/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
         <link href="{{URL::to('/')}}/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES -->
@@ -51,31 +53,43 @@
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar-wrapper page-sidebar-fix">
-				<div class="page-sidebar navbar-collapse collapse">
-					<!-- BEGIN SIDEBAR MENU -->
-					<!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-					<!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-					<!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-					<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-					<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-					<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-					<ul class="page-sidebar-menu" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
-							<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-							@include('common.nav3')
-					</ul>
-					<!-- END SIDEBAR MENU -->
-				</div>
+                <div class="page-sidebar navbar-collapse collapse">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                    
+                    <div class="user">
+                        <div class="user-avatar">
+                            <img src="https://scontent.fcgy1-1.fna.fbcdn.net/v/t1.0-9/s960x960/51135294_2663126750380630_5075172852919959552_o.jpg?_nc_cat=107&_nc_oc=AQmlCagoBPI-V1T05ygdFDqbGXo-qc7IqqZAeluD0bBfY-qXXZdN7e9ZXHQ7tJoGwbI&_nc_ht=scontent.fcgy1-1.fna&oh=7b46c49cfa911d12e37c5431478bc038&oe=5E57E479">
+                        </div>
+                        
+                        <div class="user-name">
+                            <p class="name">Michael Jumoc</p>
+                            <p class="position">Frontend Developer</p>
+                        </div>
+                    </div>
 
-				<!-- BEGIN FOOTER -->
-				<div class="page-footer">
-					<div class="page-footer-inner">
-						2014 &copy; Agent 5.
-					</div>
-					<div class="scroll-to-top">
-							<i class="icon-arrow-up"></i>
-					</div>
-				</div>
-				<!-- END FOOTER -->
+                    <ul class="page-sidebar-menu" data-slide-speed="200" data-auto-scroll="true" data-keep-expanded="false">
+                            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                            @include('common.nav3')
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                </div>
+
+                <!-- BEGIN FOOTER -->
+                <div class="page-footer">
+                    <div class="page-footer-inner">
+                        2014 &copy; Agent 5.
+                    </div>
+                    <div class="scroll-to-top">
+                            <i class="icon-arrow-up"></i>
+                    </div>
+                </div>
+                <!-- END FOOTER -->
             </div>
             <!-- END SIDEBAR -->
             <!-- BEGIN CONTENT -->
@@ -84,10 +98,13 @@
 				<div class="page-header navbar">
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 					<div class="sidebar-toggler">
-						<div class="hamburger-box">
-							<div class="hamburger-inner"></div>
-						</div>
-					</div>
+                        <svg class="sidebar-toggler-icon menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 384h384v-42.666H64V384zm0-106.666h384v-42.667H64v42.667zM64 128v42.665h384V128H64z"/></svg>
+                        <svg class="sidebar-toggler-icon arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"/></svg>
+                    </div>
+
+                    <h4 class="page-title">
+                        @yield('page_header')
+                    </h4>
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 
 					<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -124,19 +141,17 @@
 
                 <div class="page-content">
 					<!-- BEGIN PAGE HEADER-->
-					<h3 class="page-title">
-					@yield('page_header')
-					</h3>
-					<div class="page-bar">
+				
+					{{-- <div class="page-bar">
 						<ul class="page-breadcrumb">
 							<li>
-									<i class="fa fa-home"></i>
-									<a href="{{URL::to('/')}}">Home</a>
-									<i class="fa fa-angle-right"></i>
+                                <i class="fa fa-home"></i>
+                                <a href="{{URL::to('/')}}">Home</a>
+                                <i class="fa fa-angle-right"></i>
 							</li>
 							@yield('breadcrumb')
 						</ul>
-					</div>
+					</div> --}}
 					<!-- END PAGE HEADER-->
 					@yield('content')
 					<!--Modal Start-->
@@ -182,6 +197,7 @@
         <script src="{{URL::to('/')}}/assets/global/scripts/metronic.js" type="text/javascript"></script>
         <script src="{{URL::to('/')}}/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
         <script src="{{URL::to('/')}}/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+        <script src="{{URL::to('/')}}/assets/admin/layout/scripts/simplebar.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="{{URL::to('/')}}/assets/global/plugins/bootbox/bootbox.min.js"></script>
         <script src="{{URL::to('/')}}/assets/page/scripts/common/notification.js"></script>
         <script src="{{URL::to('/')}}/assets/page/scripts/common/general.js"></script>

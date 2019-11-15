@@ -21,17 +21,15 @@
 @stop
 
 @section('content')
-    <div class="portlet box blue">
-        <div class="portlet-title">
-            <div class="caption">
-                Group Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body">
+
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="group_form">
                 <div class="form-body">
-                        <h3 class="form-section">Group Info</h3>
+                        <h4 class="card-description">
+                            Group Info
+                        </h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -50,7 +48,9 @@
                                 </div>
                             </div>
                         </div>
-                        <h3 class="form-section">Module List</h3>
+                        <h4 class="card-description">
+                            Module List
+                        </h4>
                         <div class="row">
                             @foreach (App\Models\ACL\Module::all() as $module)
                             <div class="col-md-2">
@@ -70,7 +70,9 @@
                             </div>
                             @endforeach
                         </div>
-                        <h3 class="form-section">Module Pages</h3>
+                        <h4 class="card-description">
+                            Module Pages
+                        </h4>
                         @include('content.group.form.group_form_pages')
                 </div>
                 <div class="form-actions right">
