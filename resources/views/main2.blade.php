@@ -83,7 +83,7 @@
                 <!-- BEGIN FOOTER -->
                 <div class="page-footer">
                     <div class="page-footer-inner">
-                        2014 &copy; Agent 5.
+                        2019 &copy; Access Management System
                     </div>
                     <div class="scroll-to-top">
                             <i class="icon-arrow-up"></i>
