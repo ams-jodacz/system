@@ -64,7 +64,9 @@
                     
                     <div class="user">
                         <div class="user-avatar">
-                            <img src="{{URL::to('/')}}/images/sbu.png">
+                            <a href="{{URL::to('/')}}">
+                                <img src="{{URL::to('/')}}/images/sbu.png">
+                            </a>
                         </div>
                         
                         <div class="user-name">

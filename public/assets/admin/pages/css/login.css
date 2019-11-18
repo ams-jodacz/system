@@ -58,7 +58,8 @@ Login page
   color: #8290a3;
   border: 1px solid #dde3ec;
 }
-.login .content .form-control:focus, .login .content .form-control:active {
+.login .content .form-control:focus,
+.login .content .form-control:active {
   border: 1px solid #c3ccda;
 }
 .login .content .form-control::-moz-placeholder {
