@@ -20,17 +20,14 @@
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">
                 Attendance Station Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+            </h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="attendance_station_form">
                 <div class="form-body">
-                        <h3 class="form-section">Attendance Station Form</h3>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">

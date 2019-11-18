@@ -16,42 +16,36 @@
 @stop
 
 @section('page_header')
-    Station Time Logs
+    Station
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        Station Time Logs
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <form method="post" class="horizontal-form">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="control-label">Station List</label>
-                                        <select id="station_group_id" name="station_group_id" class="select2 form-control" data-placeholder="Choose a Station Group" tabindex="1">
-                                            <option value=""></option>
-                                            @foreach(App\Models\Stations\StationGroup::all() as $station_group)
-                                                <option value="{{$station_group->station_group_id}}">{{$station_group->group_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">Station list</h4>
+            <form method="post" class="horizontal-form">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select id="station_group_id" name="station_group_id" class="select2 form-control" data-placeholder="Choose a Station Group" tabindex="1">
+                                    <option value=""></option>
+                                    @foreach(App\Models\Stations\StationGroup::all() as $station_group)
+                                        <option value="{{$station_group->station_group_id}}">{{$station_group->group_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                    </form>
-                    <div id="profile_container">
                     </div>
                 </div>
+            </form>
+            <div id="profile_container">
             </div>
         </div>
     </div>
+
+
     <!--Modal Start-->
     <div class="modal fade bs-modal-lg" id="info_ajax" role="basic" aria-hidden="true">
         <div class="page-loading page-loading-boxed">

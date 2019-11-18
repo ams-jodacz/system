@@ -24,49 +24,44 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        Station Access List
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    @if ($action_value&App\Models\ACL\Action::$Add)
-                        @include('content.access.form.access_form')
-                    @endif
-                    <table class="table table-striped table-bordered table-hover" id="access_list_table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Station Group
-                                </th>
-                                <th>
-                                    Classification
-                                </th>
-                                <th>
-                                    Classification Group
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div id="action_str" style="display:none">
-                        <a class=" btn default btn-xs" href="{{URL::to('stations/access/view/##NUM##')}}" data-target="#station_info_ajax" data-toggle="modal">
-                            <i class="fa fa-eye"></i>
-                            View
-                        </a>
-                        @if ($action_value&App\Models\ACL\Action::$Delete)
-                        <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
-                            <i class="fa fa-trash"></i>
-                            Remove
-                        </a>
-                        @endif
-                    </div>
-                </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">
+                Station Access List
+            </h4>
+            
+            @if ($action_value&App\Models\ACL\Action::$Add)
+                @include('content.access.form.access_form')
+            @endif
+            <table class="table table-striped table-bordered table-hover" id="access_list_table">
+                <thead>
+                    <tr>
+                        <th>
+                            Station Group
+                        </th>
+                        <th>
+                            Classification
+                        </th>
+                        <th>
+                            Classification Group
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div id="action_str" style="display:none">
+                <a class=" btn default btn-xs" href="{{URL::to('stations/access/view/##NUM##')}}" data-target="#station_info_ajax" data-toggle="modal">
+                    <i class="fa fa-eye"></i>
+                    View
+                </a>
+                @if ($action_value&App\Models\ACL\Action::$Delete)
+                <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
+                    <i class="fa fa-trash"></i>
+                    Remove
+                </a>
+                @endif
             </div>
         </div>
     </div>

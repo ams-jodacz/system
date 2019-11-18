@@ -20,87 +20,79 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        Direct Messaging
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">Direct Messaging</h4>
+            <!-- BEGIN FORM-->
+            <form method="post" class="horizontal-form" id="direct_message_form">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    {!!
+                                        Form::checkbox('all',1,true,
+                                        array(
+                                            'id' => 'all',
+                                            'class'=>'modules_btn icheck',
+                                            'data-checkbox' => 'icheckbox_square-grey'
+                                        ));
+                                    !!}
+                                    Send To All
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Classification</label>
+                                <select id="class_id" name="class_id" class="select2 form-control" data-placeholder="Choose a Station Group" tabindex="1">
+                                    @foreach(App\Models\Classification\Classification::all() as $classification)
+                                        <option value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Classfication Group</label>
+                                <select id="class_group_id" name="class_group_id" class="select2 form-control" data-placeholder="Choose a Group" tabindex="1">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Members</label>
+                                <select id="member_id" name="member_id" class="select2 form-control" data-placeholder="Choose a Member" tabindex="1">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Message</label>
+                                {!!
+                                    Form::textarea('message','',
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'message',
+                                        'placeholder'=>'Message',
+                                        'rows' => 5,
+                                        'maxlength' => '255',
+                                    ))
+                                !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="portlet-body form">
-                    <!-- BEGIN FORM-->
-                    <form method="post" class="horizontal-form" id="direct_message_form">
-                        <div class="form-body">
-                                <h3 class="form-section">Direct Messaging Form</h3>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>
-                                                {!!
-                                                    Form::checkbox('all',1,true,
-                                                    array(
-                                                        'id' => 'all',
-                                                        'class'=>'modules_btn icheck',
-                                                        'data-checkbox' => 'icheckbox_square-grey'
-                                                    ));
-                                                !!}
-                                                Send To All
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label">Classification</label>
-                                            <select id="class_id" name="class_id" class="select2 form-control" data-placeholder="Choose a Station Group" tabindex="1">
-                                                @foreach(App\Models\Classification\Classification::all() as $classification)
-                                                    <option value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label">Classfication Group</label>
-                                            <select id="class_group_id" name="class_group_id" class="select2 form-control" data-placeholder="Choose a Group" tabindex="1">
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label">Members</label>
-                                            <select id="member_id" name="member_id" class="select2 form-control" data-placeholder="Choose a Member" tabindex="1">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Message</label>
-                                            {!!
-                                                Form::textarea('message','',
-                                                array(
-                                                    'class'=>'form-control',
-                                                    'id'=>'message',
-                                                    'placeholder'=>'Message',
-                                                    'rows' => 5,
-                                                    'maxlength' => '255',
-                                                ))
-                                            !!}
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="form-actions right">
-                                <button type="submit" class="btn blue"><i class="fa fa-check"></i>Send</button>
-                        </div>
-                    </form>
-                    <!-- END FORM-->
+                <div class="form-actions right">
+                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>Send</button>
                 </div>
-            </div>
+            </form>
+            <!-- END FORM-->
         </div>
     </div>
+
     <!--Modal Start-->
     <div class="modal fade bs-modal-lg" id="info_ajax" role="basic" aria-hidden="true">
         <div class="page-loading page-loading-boxed">

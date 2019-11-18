@@ -16,175 +16,179 @@
 @stop
 
 @section('page_header')
-    Member
+    Add Member  
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
-                Member Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body">
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="member_form">
-                <div class="form-body">
-                        <h3 class="form-section">Member Form</h3>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Classification</label>
-                                    <select id="class_id" name="class_id" class="select2 form-control" data-placeholder="Choose a Classification" tabindex="1">
-                                        @foreach(App\Models\Classification\Classification::all() as $classification)
-                                            @if (isset($member_data) && ($classification->class_id == $member_data->classificationGroup->class_id))
-                                            <option selected="selected" value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
-                                            @else
-                                            <option value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Classification Group</label>
-                                    <select id="class_group_id" name="class_group_id" class="select2 form-control" data-placeholder="Choose a Classification Group" tabindex="1">
-                                        <option value=""></option>
-                                        @if (isset($member_data))
-                                            @foreach(App\Models\Classification\ClassificationGroup::where(array('class_id' => $member_data->classificationGroup->class_id))->get() as $classification_group)
-                                                @if (isset($member_data) && ($classification_group->class_group_id == $member_data->class_group_id))
-                                                <option selected="selected" value="{{$classification_group->class_group_id}}">{{$classification_group->group_name}}</option>
-                                                @else
-                                                <option value="{{$classification_group->class_group_id}}">{{$classification_group->group_name}}</option>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Status</label>
-                                    {!!
-                                        Form::select('active_status',
-                                            array(
-                                                true=>'Active',
-                                                false=>'Inactive'
-                                            ),
-                                            isset($member_data)?$member_data->active_status:null,
-                                            array(
-                                                'class'=>'select2 form-control',
-                                                'id'=>'active_status',
-                                                'data-placeholder'=>'Choose a Status',
-                                                'tabindex' => '1'
-                                            )
-                                        )
-                                    !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">ID Number</label>
-                                    {!!
-                                        Form::text('id_number',isset($member_data)?$member_data->id_number:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'id_number',
-                                            'placeholder'=>'ID Number',
-                                        ))
-                                    !!}
-                                    @if (isset($member_data))
-                                        <input type="hidden" id="member_id" value="{{$member_data->member_id}}" />
+                <h4 class="card-title">Member Form</h4>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Classification</label>
+                            <select id="class_id" name="class_id" class="select2 form-control" data-placeholder="Choose a Classification" tabindex="1">
+                                @foreach(App\Models\Classification\Classification::all() as $classification)
+                                    @if (isset($member_data) && ($classification->class_id == $member_data->classificationGroup->class_id))
+                                    <option selected="selected" value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
+                                    @else
+                                    <option value="{{$classification->class_id}}">{{$classification->classification_name}}</option>
                                     @endif
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Contact Number</label>
-                                    {!!
-                                        Form::text('contact_number',isset($member_data)?$member_data->memberInformation->contact_number:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'contact_number',
-                                            'placeholder'=>'Contact Number',
-                                        ))
-                                    !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Email</label>
-                                    {!!
-                                        Form::text('email',isset($member_data)?$member_data->memberInformation->email:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'email',
-                                            'placeholder'=>'Email',
-                                        ))
-                                    !!}
-                                </div>
-                            </div>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">First Name</label>
-                                    {!!
-                                        Form::text('first_name',isset($member_data)?$member_data->memberInformation->first_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'first_name',
-                                            'placeholder'=>'First Name',
-                                        ))
-                                    !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Middle Name</label>
-                                    {!!
-                                        Form::text('middle_name',isset($member_data)?$member_data->memberInformation->middle_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'middle_name',
-                                            'placeholder'=>'Middle Name',
-                                        ))
-                                    !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Last Name</label>
-                                    {!!
-                                        Form::text('last_name',isset($member_data)?$member_data->memberInformation->last_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'last_name',
-                                            'placeholder'=>'Last Name',
-                                        ))
-                                    !!}
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Classification Group</label>
+                            <select id="class_group_id" name="class_group_id" class="select2 form-control" data-placeholder="Choose a Classification Group" tabindex="1">
+                                <option value=""></option>
+                                @if (isset($member_data))
+                                    @foreach(App\Models\Classification\ClassificationGroup::where(array('class_id' => $member_data->classificationGroup->class_id))->get() as $classification_group)
+                                        @if (isset($member_data) && ($classification_group->class_group_id == $member_data->class_group_id))
+                                        <option selected="selected" value="{{$classification_group->class_group_id}}">{{$classification_group->group_name}}</option>
+                                        @else
+                                        <option value="{{$classification_group->class_group_id}}">{{$classification_group->group_name}}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
-                        <h3 class="form-section">Recipients</h3>
-                        <div class="row">
-                            <div class="col-md-12">
-                                @include('content.member.modal.member_recipient_table')
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+                            {!!
+                                Form::select('active_status',
+                                    array(
+                                        true=>'Active',
+                                        false=>'Inactive'
+                                    ),
+                                    isset($member_data)?$member_data->active_status:null,
+                                    array(
+                                        'class'=>'select2 form-control',
+                                        'id'=>'active_status',
+                                        'data-placeholder'=>'Choose a Status',
+                                        'tabindex' => '1'
+                                    )
+                                )
+                            !!}
                         </div>
+                    </div>
                 </div>
-                <div class="form-actions right">
-                        <a class=" btn default" href="{{URL::to('member')}}">
-                            Back
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">ID Number</label>
+                            {!!
+                                Form::text('id_number',isset($member_data)?$member_data->id_number:null,
+                                array(
+                                    'class'=>'form-control',
+                                    'id'=>'id_number',
+                                    'placeholder'=>'ID Number',
+                                ))
+                            !!}
+                            @if (isset($member_data))
+                                <input type="hidden" id="member_id" value="{{$member_data->member_id}}" />
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Contact Number</label>
+                            {!!
+                                Form::text('contact_number',isset($member_data)?$member_data->memberInformation->contact_number:null,
+                                array(
+                                    'class'=>'form-control',
+                                    'id'=>'contact_number',
+                                    'placeholder'=>'Contact Number',
+                                ))
+                            !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            {!!
+                                Form::text('email',isset($member_data)?$member_data->memberInformation->email:null,
+                                array(
+                                    'class'=>'form-control',
+                                    'id'=>'email',
+                                    'placeholder'=>'Email',
+                                ))
+                            !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">First Name</label>
+                            {!!
+                                Form::text('first_name',isset($member_data)?$member_data->memberInformation->first_name:null,
+                                array(
+                                    'class'=>'form-control',
+                                    'id'=>'first_name',
+                                    'placeholder'=>'First Name',
+                                ))
+                            !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Middle Name</label>
+                            {!!
+                                Form::text('middle_name',isset($member_data)?$member_data->memberInformation->middle_name:null,
+                                array(
+                                    'class'=>'form-control',
+                                    'id'=>'middle_name',
+                                    'placeholder'=>'Middle Name',
+                                ))
+                            !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Last Name</label>
+                            {!!
+                                Form::text('last_name',isset($member_data)?$member_data->memberInformation->last_name:null,
+                                array(
+                                    'class'=>'form-control',
+                                    'id'=>'last_name',
+                                    'placeholder'=>'Last Name',
+                                ))
+                            !!}
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4 class="card-title">Recipients</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <a class=" btn default green btn-xs pull-right" href="{{URL::to('member/view/0?actionType=recipient&id=0')}}" data-target="#recipient_info_ajax" data-toggle="modal">
+                            <i class="fa fa-plus"></i>
+                            Add
                         </a>
-                        @if (!isset($member_data))
-                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>Save</button>
-                        @else
-                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>Update</button>
-                        @endif
+                    </div>
+                </div>
+               
+                @include('content.member.modal.member_recipient_table')
+
+                <div class="form-actions pull-right">
+                    <a class=" btn default" href="{{URL::to('member')}}">
+                        Back
+                    </a>
+                    @if (!isset($member_data))
+                    <button type="submit" class="btn blue"><i class="fa fa-check"></i>Save</button>
+                    @else
+                    <button type="submit" class="btn blue"><i class="fa fa-check"></i>Update</button>
+                    @endif
                 </div>
             </form>
             <!-- END FORM-->

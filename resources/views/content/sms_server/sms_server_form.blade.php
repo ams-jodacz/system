@@ -16,78 +16,73 @@
 @stop
 
 @section('page_header')
-    SMS Server Form
+    SMS Server
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
-                SMS Server Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">SMS Server Form</h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="sms_server_form">
                 <div class="form-body">
-                        <h3 class="form-section">SMS Server Form</h3>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Server Name</label>
-                                    {!!
-                                        Form::text('server_name',isset($server_data)?$server_data->server_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'server_name',
-                                            'placeholder'=>'Server Name',
-                                        ))
-                                    !!}
-                                    @if (isset($server_data))
-                                        <input type="hidden" id="sms_server_id" value="{{$server_data->sms_server_id}}" />
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">IP</label>
-                                    {!!
-                                        Form::text('ip',isset($server_data)?$server_data->ip:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'ip',
-                                            'placeholder'=>'IP',
-                                        ))
-                                    !!}
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Username</label>
-                                    {!!
-                                        Form::text('username',isset($server_data)?$server_data->username:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'username',
-                                            'placeholder'=>'Username',
-                                        ))
-                                    !!}
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Password</label>
-                                    {!!
-                                        Form::text('password',isset($server_data)?$server_data->password:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'password',
-                                            'placeholder'=>'Password',
-                                        ))
-                                    !!}
-                                </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Server Name</label>
+                                {!!
+                                    Form::text('server_name',isset($server_data)?$server_data->server_name:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'server_name',
+                                        'placeholder'=>'Server Name',
+                                    ))
+                                !!}
+                                @if (isset($server_data))
+                                    <input type="hidden" id="sms_server_id" value="{{$server_data->sms_server_id}}" />
+                                @endif
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">IP</label>
+                                {!!
+                                    Form::text('ip',isset($server_data)?$server_data->ip:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'ip',
+                                        'placeholder'=>'IP',
+                                    ))
+                                !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Username</label>
+                                {!!
+                                    Form::text('username',isset($server_data)?$server_data->username:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'username',
+                                        'placeholder'=>'Username',
+                                    ))
+                                !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Password</label>
+                                {!!
+                                    Form::text('password',isset($server_data)?$server_data->password:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'password',
+                                        'placeholder'=>'Password',
+                                    ))
+                                !!}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-actions right">
                         <a class=" btn default" href="{{URL::to('sms/server')}}">

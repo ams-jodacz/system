@@ -20,49 +20,48 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        Guest Group List
-                    </div>
-                    <div class="actions">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="card-description">Guest Group List</h4>
+                </div>
+                <div class="col-md-3">
+                    <div class="pull-right">
                         @include('common.button',array('base_url'=>'guest/group','base_id'=>'guest_group','buttons'=>array('add'),'action_value'=>$action_value))
                     </div>
                 </div>
-                <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="guest_group_list_table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Group Name
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div id="action_str" style="display:none">
-                        <a class=" btn default btn-xs" href="{{URL::to('guest/group/view/##NUM##')}}" data-target="#delivery_info_ajax" data-toggle="modal">
-                            <i class="fa fa-eye"></i>
-                            View
-                        </a>
-                        @if ($action_value&App\Models\ACL\Action::$Edit)
-                        <a data-id="##NUM##" href="{{URL::to('guest/group/update/##NUM##')}}" class="btn default btn-xs green">
-                            <i class="fa fa-edit"></i>
-                            Update
-                        </a>
-                        @endif
-                        @if ($action_value&App\Models\ACL\Action::$Delete)
-                        <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
-                            <i class="fa fa-trash"></i>
-                            Remove
-                        </a>
-                        @endif
-                    </div>
-                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover" id="guest_group_list_table">
+                <thead>
+                    <tr>
+                        <th>
+                            Group Name
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div id="action_str" style="display:none">
+                <a class=" btn default btn-xs" href="{{URL::to('guest/group/view/##NUM##')}}" data-target="#delivery_info_ajax" data-toggle="modal">
+                    <i class="fa fa-eye"></i>
+                    View
+                </a>
+                @if ($action_value&App\Models\ACL\Action::$Edit)
+                <a data-id="##NUM##" href="{{URL::to('guest/group/update/##NUM##')}}" class="btn default btn-xs green">
+                    <i class="fa fa-edit"></i>
+                    Update
+                </a>
+                @endif
+                @if ($action_value&App\Models\ACL\Action::$Delete)
+                <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
+                    <i class="fa fa-trash"></i>
+                    Remove
+                </a>
+                @endif
             </div>
         </div>
     </div>

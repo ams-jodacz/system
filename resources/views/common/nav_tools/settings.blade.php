@@ -1,10 +1,10 @@
 <li class="dropdown dropdown-user">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-    <img alt="" class="img-circle" src="{{URL::to('/')}}/images/{{App\Models\ACL\User::getPicName()}}"/>
-    <span class="username username-hide-on-mobile">
-        {{App\Models\ACL\User::getFistName()}}
-    </span>
-    <i class="fa fa-angle-down"></i>
+    <img alt="" src="{{URL::to('/')}}/images/{{App\Models\ACL\User::getPicName()}}"/>
+        {{-- <span class="username username-hide-on-mobile">
+                {{App\Models\ACL\User::getFistName()}}
+        </span> --}}
+        {{-- <i class="fa fa-angle-down"></i> --}}
     </a>
     <ul class="dropdown-menu dropdown-menu-default">
             <li>
@@ -27,8 +27,7 @@
             <!--        7 </span>-->
             <!--        </a>-->
             <!--</li>-->
-            <li class="divider">
-            </li>
+
             <!--<li>-->
             <!--        <a href="extra_lock.html">-->
             <!--        <i class="icon-lock"></i> Lock Screen </a>-->

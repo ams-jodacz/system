@@ -266,7 +266,7 @@ html {
 .body {
   overflow: hidden;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("../../../images/bg.jpg");
+    url("../../../images/sbu-bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -423,10 +423,10 @@ html {
 }
 .usercard__logo {
   position: absolute;
-  top: -5px;
+  top: 10px;
   right: 10px;
   width: 10vw;
-  opacity: 0.2;
+  opacity: 0.4;
 }
 .usercard__footer {
   margin-top: 15px;
@@ -443,4 +443,12 @@ html {
 }
 .usercard__footer.exit {
   background: #9b2819;
+}
+
+#particles-js {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

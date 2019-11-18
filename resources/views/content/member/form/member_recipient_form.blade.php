@@ -8,7 +8,6 @@
         <!-- BEGIN FORM-->
         <form method="post" class="horizontal-form" id="member_recipient_form">
             <div class="form-body">
-                    <h3 class="form-section">Recipient Form</h3>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">

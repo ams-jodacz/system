@@ -16,56 +16,61 @@
 @stop
 
 @section('page_header')
-    Date Exemption Messaging
+    Date Exemption
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
+    <div class="card">
+        <div class="portlet-title">
+
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="card-description">
                         Date Exemption Messaging
-                    </div>
-                    <div class="actions">
+                    </h4>
+                </div>
+                <div class="col-md-3">
+                    <div class="pull-right">
                         @include('common.button',array('base_url'=>'blast/excemption','base_id'=>'excemption','buttons'=>array('add'),'action_value'=>$action_value))
                     </div>
                 </div>
-                <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="scheduled_messaging_table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Recipients
-                                </th>
-                                <th>
-                                    Start Date
-                                </th>
-                                <th>
-                                    End Date
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div id="action_str" style="display:none">
-                        <a class=" btn default btn-xs" href="{{URL::to('blast/excemption/view/##NUM##')}}" data-target="#info_ajax" data-toggle="modal">
-                            <i class="fa fa-eye"></i>
-                            View
-                        </a>
-                        @if ($action_value&App\Models\ACL\Action::$Delete)
-                        <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
-                            <i class="fa fa-trash"></i>
-                            Remove
-                        </a>
-                        @endif
-                    </div>
-                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover" id="scheduled_messaging_table">
+                <thead>
+                    <tr>
+                        <th>
+                            Recipients
+                        </th>
+                        <th>
+                            Start Date
+                        </th>
+                        <th>
+                            End Date
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div id="action_str" style="display:none">
+                <a class=" btn default btn-xs" href="{{URL::to('blast/excemption/view/##NUM##')}}" data-target="#info_ajax" data-toggle="modal">
+                    <i class="fa fa-eye"></i>
+                    View
+                </a>
+                @if ($action_value&App\Models\ACL\Action::$Delete)
+                <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
+                    <i class="fa fa-trash"></i>
+                    Remove
+                </a>
+                @endif
             </div>
         </div>
     </div>
+
     <!--Modal Start-->
     <div class="modal fade bs-modal-lg" id="info_ajax" role="basic" aria-hidden="true">
         <div class="page-loading page-loading-boxed">

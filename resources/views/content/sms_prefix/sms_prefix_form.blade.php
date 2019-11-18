@@ -16,68 +16,65 @@
 @stop
 
 @section('page_header')
-    SMS Prefix Form
+    SMS Prefix
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">
                 SMS Prefix Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+            </h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="sms_server_form">
                 <div class="form-body">
-                        <h3 class="form-section">SMS Prefix Form</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Group Name</label>
-                                    <select id="sms_prefix_group_id" name="sms_prefix_group_id" class="select2 form-control" data-placeholder="Choose a Prefix Group" tabindex="1">
-                                        @foreach(App\Models\SMS\Group::all() as $group)
-                                            @if (isset($prefix_data) && ($group->sms_prefix_group_id == $prefix_data->sms_prefix_group_id))
-                                            <option selected="selected" value="{{$group->sms_prefix_group_id}}">{{$group->group_name}}</option>
-                                            @else
-                                            <option value="{{$group->sms_prefix_group_id}}">{{$group->group_name}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    @if (isset($prefix_data))
-                                        <input type="hidden" id="sms_prefix_id" value="{{$prefix_data->sms_prefix_id}}" />
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Prefix</label>
-                                    {!!
-                                        Form::text('prefix',isset($prefix_data)?$prefix_data->prefix:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'prefix',
-                                            'placeholder'=>'Prefix',
-                                            'maxlength' => '3',
-                                            'minlength' => '3',
-                                        ))
-                                    !!}
-                                    <p class="help-block">
-                                        Please enter 3 digit prefix. E.g: 915, 935
-                                    </p>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Group Name</label>
+                                <select id="sms_prefix_group_id" name="sms_prefix_group_id" class="select2 form-control" data-placeholder="Choose a Prefix Group" tabindex="1">
+                                    @foreach(App\Models\SMS\Group::all() as $group)
+                                        @if (isset($prefix_data) && ($group->sms_prefix_group_id == $prefix_data->sms_prefix_group_id))
+                                        <option selected="selected" value="{{$group->sms_prefix_group_id}}">{{$group->group_name}}</option>
+                                        @else
+                                        <option value="{{$group->sms_prefix_group_id}}">{{$group->group_name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @if (isset($prefix_data))
+                                    <input type="hidden" id="sms_prefix_id" value="{{$prefix_data->sms_prefix_id}}" />
+                                @endif
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Prefix</label>
+                                {!!
+                                    Form::text('prefix',isset($prefix_data)?$prefix_data->prefix:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'prefix',
+                                        'placeholder'=>'Prefix',
+                                        'maxlength' => '3',
+                                        'minlength' => '3',
+                                    ))
+                                !!}
+                                <p class="help-block">
+                                    Please enter 3 digit prefix. E.g: 915, 935
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-actions right">
-                        <a class=" btn default" href="{{URL::to('sms/prefix')}}">
-                            Back
-                        </a>
-                        @if (!isset($prefix_data))
-                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>Save</button>
-                        @else
-                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>Update</button>
-                        @endif
+                    <a class=" btn default" href="{{URL::to('sms/prefix')}}">
+                        Back
+                    </a>
+                    @if (!isset($prefix_data))
+                    <button type="submit" class="btn blue"><i class="fa fa-check"></i>Save</button>
+                    @else
+                    <button type="submit" class="btn blue"><i class="fa fa-check"></i>Update</button>
+                    @endif
                 </div>
             </form>
             <!-- END FORM-->

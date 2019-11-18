@@ -20,32 +20,28 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        IP List
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="network_list_table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    IP Address
-                                </th>
-                                <th>
-                                    Network Status
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">
+                IP List
+            </h4>
+            
+            <p class="card-description">List of available IP Address</p>
+            <table class="table table-striped table-bordered table-hover" id="network_list_table">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            IP Address
+                        </th>
+                        <th>
+                            Network Status
+                        </th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 @stop
