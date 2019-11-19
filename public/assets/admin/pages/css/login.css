@@ -2,8 +2,115 @@
 Login page
 ***/
 /* bg color */
-.login {
-  background-color: #364150 !important;
+.page-login {
+  background-image: url("../img/flap-barrier.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  font-family: "Roboto", sans-serif;
+}
+
+.page-login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(238, 238, 238, 0.75);
+}
+
+.content-wrapper {
+  padding: 30px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.content-wrapper .row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.content-wrapper .row .col-md-4 {
+  margin: auto;
+}
+
+.auth-form-light {
+  background: #ffffff;
+  padding: 48px;
+  border-radius: 3px !important;
+}
+
+.auth-form-light .form-control {
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 300;
+  height: 50px;
+  padding: 15px 31px;
+  line-height: 1.5;
+  background-color: #fff !important;
+  border-color: #e9e8ef !important;
+  color: #495057 !important;
+}
+
+.auth-form-light .form-group {
+  margin-bottom: 24px;
+}
+
+.auth-form-light .form-control:focus {
+  color: #495057 !important;
+  background-color: #fff !important;
+  border-color: #80bdff !important;
+}
+
+.auth-form-light .form-actions .btn {
+  width: 100%;
+  display: block;
+  font-size: 14px;
+  height: 50px;
+  line-height: 1.5;
+  padding: 16px 48px;
+  border-radius: 3px !important;
+  color: #fff;
+  background-color: #405189;
+  border-color: #405189;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.auth-form-light .form-actions .btn:hover {
+  color: #fff;
+  background-color: #34426f;
+  border-color: #303c66;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.brand-logo {
+  width: 110px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.brand-title {
+  font-family: inherit;
+  font-size: 28px;
+  text-align: center;
+}
+
+.form-title {
+  font-family: inherit;
+  font-size: 16px;
 }
 
 .login .logo {
@@ -11,21 +118,6 @@ Login page
   margin-top: 60px;
   padding: 15px;
   text-align: center;
-}
-
-.login .content {
-  background-color: #eceef1;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  -o-border-radius: 7px;
-  border-radius: 7px;
-  width: 400px;
-  margin: 40px auto 10px auto;
-  padding: 30px;
-  padding-top: 10px;
-  overflow: hidden;
-  position: relative;
 }
 
 .login .content h3 {

@@ -15,7 +15,6 @@
     <meta content="" name="author"/>
     
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -27,6 +26,7 @@
     <!-- END PAGE LEVEL SCRIPTS -->
     
     <!-- BEGIN THEME STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
     <link href="assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
     <link href="assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
     <link href="assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
@@ -39,44 +39,49 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class="login">
-    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-    <div class="menu-toggler sidebar-toggler">
-    </div>
-    <!-- END SIDEBAR TOGGLER BUTTON -->
-    <!-- BEGIN LOGO -->
-<!--    <div class="logo">
-            <a href="index.html">
-            <img src="assets/admin/layout/img/logo-big.png" alt=""/>
-            </a>
-    </div>-->
-    <!-- END LOGO -->
+<body class="page-login">
     <!-- BEGIN LOGIN -->
-    <div class="content">
-    
-	    <!-- BEGIN LOGIN FORM -->
-	    <form class="login-form" action="{{URL::to('login')}}" method="post">
-		    <h3 class="form-title">Sign In</h3>
-		    <div class="alert alert-danger display-hide">
-			    <button class="close" data-close="alert"></button>
-			    <span>
-			    Enter any username and password. </span>
-		    </div>
-		    <div class="form-group">
-			    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-			    <label class="control-label visible-ie8 visible-ie9">Username</label>
-			    <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
-		    </div>
-		    <div class="form-group">
-			    <label class="control-label visible-ie8 visible-ie9">Password</label>
-			    <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
-		    </div>
-		    <div class="form-actions">
-			    <button type="submit" class="btn btn-success uppercase">Login</button>
-                <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-		    </div>
-	    </form>
-	    <!-- END LOGIN FORM -->
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- BEGIN LOGIN FORM -->
+                
+                <div class="auth-form-light">
+                        <div class="brand-header">
+                                <div class="brand-logo">
+                                    <img src="{{URL::to('/')}}/images/sbu.png" alt="brand" class="img-responsive">
+                                </div>
+                                <h4 class="brand-title">
+                                    Access                              
+                                    Management 
+                                    System
+                                </h4>
+                            </div>
+                    <form class="login-form" action="{{URL::to('login')}}" method="post">               
+                        <h5 class="form-title">Sign in to continue.</h5>
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button>
+                            <span>
+                            Enter any username and password. </span>
+                        </div>
+                        <div class="form-group">
+                            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                            <label class="control-label visible-ie8 visible-ie9">Username</label>
+                            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label visible-ie8 visible-ie9">Password</label>
+                            <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success btn-lg uppercase">Sign In</button>
+                            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                        </div>
+                    </form>
+                </div>
+                <!-- END LOGIN FORM -->
+            </div>
+        </div>
     </div>
     <!-- END LOGIN -->
     
