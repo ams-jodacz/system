@@ -63,12 +63,14 @@
                     
                     <div class="user">
                         <div class="user-avatar">
-                            <img src="https://scontent.fcgy1-1.fna.fbcdn.net/v/t1.0-9/s960x960/51135294_2663126750380630_5075172852919959552_o.jpg?_nc_cat=107&_nc_oc=AQmlCagoBPI-V1T05ygdFDqbGXo-qc7IqqZAeluD0bBfY-qXXZdN7e9ZXHQ7tJoGwbI&_nc_ht=scontent.fcgy1-1.fna&oh=7b46c49cfa911d12e37c5431478bc038&oe=5E57E479">
+                            <a href="{{URL::to('/')}}">
+                                <img src="{{URL::to('/')}}/images/sbu.png">
+                            </a>
                         </div>
                         
                         <div class="user-name">
-                            <p class="name">Michael Jumoc</p>
-                            <p class="position">Frontend Developer</p>
+                            <p class="name">Access Management System</p>
+                            <p class="position">Admin</p>
                         </div>
                     </div>
 
