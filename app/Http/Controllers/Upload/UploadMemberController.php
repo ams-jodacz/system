@@ -191,9 +191,9 @@ class UploadMemberController extends Controller {
 
         		if ($member->memberInformation == null){
             		$memberInformation = new MemberInformation;
-            		$memberInformation->first_name = $data->firstname;
-            		$memberInformation->middle_name = $data->middleinitial;
-            		$memberInformation->last_name = $data->lastname;
+            		$memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
+            		$memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
+            		$memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
             		// $memberInformation->contact_number = $data->MobileNo;
             		// $memberInformation->email = $data->Email;
             		if ($member->save()){
@@ -204,9 +204,9 @@ class UploadMemberController extends Controller {
             		}
         		}
         		else{
-            		$member->memberInformation->first_name = $data->firstname;
-            		$member->memberInformation->middle_name = $data->middleinitial;
-            		$member->memberInformation->last_name = $data->lastname;
+            		$member->memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
+            		$member->memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
+            		$member->memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
             		// $member->memberInformation->contact_number = $data->MobileNo;
             		// $member->memberInformation->email = $data->Email;
             		if ($member->save()){
@@ -261,9 +261,9 @@ class UploadMemberController extends Controller {
 
         		if ($member->memberInformation == null){
             		$memberInformation = new MemberInformation;
-            		$memberInformation->first_name = $data->firstname;
-            		$memberInformation->middle_name = $data->middleinitial;
-            		$memberInformation->last_name = $data->lastname;
+            		$memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
+            		$memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
+            		$memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
             		// $memberInformation->contact_number = $data->MobileNo;
             		// $memberInformation->email = $data->Email;
             		if ($member->save()){

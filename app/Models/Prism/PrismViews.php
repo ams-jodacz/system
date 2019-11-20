@@ -7,11 +7,11 @@ use PDO;
 class PrismViews extends Model{
 
     public static function getOfficialK12List($term_id){
-        $query = "Select (select firstname from ES_Students where studentno=reg.studentno) as firstname,
+        $query = "Select (select ISNULL(firstname,'') as firstname from ES_Students where studentno=reg.studentno) as firstname,
             (select middleinitial from ES_Students where studentno=reg.studentno) as middleinitial,
             (select lastname from ES_Students where studentno=reg.studentno) as lastname,
             (select extname from ES_Students where studentno=reg.studentno) as extname,
-			(select SectionName from ES_classsections where SectionID=reg.ClasssectionID) as SectionName,
+	    ISNULL(dbo.fn_ProgramName(reg.ProgID),'Unknown') as SectionName,
             dbo.fn_StudentYearLevel_k12(reg.studentno) as GradeLevel,
             reg.studentno as StudentNo
         from ES_registrations as reg
