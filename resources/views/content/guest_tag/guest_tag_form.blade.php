@@ -20,17 +20,12 @@
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
-                Guest Tag Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body"> 
+            <p class="card-description">Guest Tag Form</p>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="guest_tag_form">
                 <div class="form-body">
-                        <h3 class="form-section">Guest Tag Form</h3>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -77,7 +72,7 @@
                             </div>
                         </div>
                 </div>
-                <div class="form-actions right">
+                <div class="form-actions pull-right">
                         <a class=" btn default" href="{{URL::to('guest')}}">
                             Back
                         </a>

@@ -24,49 +24,45 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        Guest Station Access List
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    @if ($action_value&App\Models\ACL\Action::$Add)
-                        @include('content.guest_access.form.access_form')
-                    @endif
-                    <table class="table table-striped table-bordered table-hover" id="access_list_table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Station Group
-                                </th>
-                                <th>
-                                    Guest Group Name
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div id="action_str" style="display:none">
-                        <a class=" btn default btn-xs" href="{{URL::to('guest/access/view/##NUM##')}}" data-target="#guest_access_info_ajax" data-toggle="modal">
-                            <i class="fa fa-eye"></i>
-                            View
-                        </a>
-                        @if ($action_value&App\Models\ACL\Action::$Delete)
-                        <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
-                            <i class="fa fa-trash"></i>
-                            Remove
-                        </a>
-                        @endif
-                    </div>
-                </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">
+                Guest Station Access List
+            </h4>
+
+            @if ($action_value&App\Models\ACL\Action::$Add)
+                @include('content.guest_access.form.access_form')
+            @endif
+            <table class="table table-striped table-bordered table-hover" id="access_list_table">
+                <thead>
+                    <tr>
+                        <th>
+                            Station Group
+                        </th>
+                        <th>
+                            Guest Group Name
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div id="action_str" style="display:none">
+                <a class=" btn default btn-xs" href="{{URL::to('guest/access/view/##NUM##')}}" data-target="#guest_access_info_ajax" data-toggle="modal">
+                    <i class="fa fa-eye"></i>
+                    View
+                </a>
+                @if ($action_value&App\Models\ACL\Action::$Delete)
+                <a data-id="##NUM##" class="remove_btn btn default btn-xs red">
+                    <i class="fa fa-trash"></i>
+                    Remove
+                </a>
+                @endif
             </div>
         </div>
     </div>
+
     <!--Modal Start-->
     <div class="modal fade" id="guest_access_info_ajax" role="basic" aria-hidden="true">
         <div class="page-loading page-loading-boxed">

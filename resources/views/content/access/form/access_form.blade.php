@@ -14,7 +14,6 @@
                             <!-- BEGIN FORM-->
                             <form method="post" class="horizontal-form" id="access_form">
                                 <div class="form-body">
-                                        <h3 class="form-section">Access Form</h3>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">

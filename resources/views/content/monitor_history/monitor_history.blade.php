@@ -20,56 +20,49 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet box blue-hoki">
-                <div class="portlet-title">
-                    <div class="caption">
-                        Station Time Logs
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="station_log_list_table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Station Group
-                                </th>
-                                <th>
-                                    Station Name
-                                </th>
-                                <th>
-                                    ID Number
-                                </th>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Status
-                                </th>
-                                <th>
-                                    Date Time
-                                </th>
-                                <th>
-                                    Image
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div id="action_str" style="display:none">
-                        <a class=" btn default btn-xs" href="{{URL::to('monitor/station/view/##NUM##')}}" data-target="#info_ajax" data-toggle="modal">
-                            <i class="fa fa-eye"></i>
-                            View
-                        </a>
-                    </div>
-                    </div>
-                </div>
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped table-bordered table-hover" id="station_log_list_table">
+                <thead>
+                    <tr>
+                        <th>
+                            Station Group
+                        </th>
+                        <th>
+                            Station Name
+                        </th>
+                        <th>
+                            ID Number
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Date Time
+                        </th>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div id="action_str" style="display:none">
+                <a class=" btn default btn-xs" href="{{URL::to('monitor/station/view/##NUM##')}}" data-target="#info_ajax" data-toggle="modal">
+                    <i class="fa fa-eye"></i>
+                    View
+                </a>
+            </div>
             </div>
         </div>
     </div>
+
     <!--Modal Start-->
     <div class="modal fade bs-modal-lg" id="info_ajax" role="basic" aria-hidden="true">
         <div class="page-loading page-loading-boxed">

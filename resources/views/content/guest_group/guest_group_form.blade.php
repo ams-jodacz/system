@@ -20,21 +20,15 @@
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
-                Guest Group Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Group Name</h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="guest_group_form">
                 <div class="form-body">
-                        <h3 class="form-section">Guest Group Form</h3>
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label class="control-label">Group Name</label>
                                     {!!
                                         Form::text('group_name',isset($guest_group_data)?$guest_group_data->group_name:null,
                                         array(
@@ -50,7 +44,7 @@
                             </div>
                         </div>
                 </div>
-                <div class="form-actions right">
+                <div class="form-actions pull-right">
                         <a class=" btn default" href="{{URL::to('guest/group')}}">
                             Back
                         </a>

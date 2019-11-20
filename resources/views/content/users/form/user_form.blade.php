@@ -32,17 +32,13 @@
             {{ Session::get('warning') }}
         </div>
     @endif
-    <div class="portlet box blue">
-        <div class="portlet-title">
-            <div class="caption">
-                User Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+    <div class="card">
+        <div class="card-body">
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="users_form">
                 <div class="form-body">
-                        <h3 class="form-section">Login Info</h3>
+                        <h4 class="card-description">Login Info</h4>
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -96,7 +92,8 @@
                                 </div>
                             </div>
                         </div>
-                        <h3 class="form-section">Personal Info</h3>
+
+                        <h4 class="card-description">Personal Info</h4>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">

@@ -16,39 +16,36 @@
 @stop
 
 @section('page_header')
-    SMS Prefix Group Form
+    SMS Prefix Group
 @stop
 
 @section('content')
-    <div class="portlet box blue-hoki">
-        <div class="portlet-title">
-            <div class="caption">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-description">
                 SMS Prefix Group Form
-            </div>
-        </div>
-        <div class="portlet-body form">
+            </h4>
             <!-- BEGIN FORM-->
             <form method="post" class="horizontal-form" id="sms_server_form">
                 <div class="form-body">
-                        <h3 class="form-section">SMS Prefix Group Form</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Group Name</label>
-                                    {!!
-                                        Form::text('group_name',isset($group_data)?$group_data->group_name:null,
-                                        array(
-                                            'class'=>'form-control',
-                                            'id'=>'group_name',
-                                            'placeholder'=>'Group Name',
-                                        ))
-                                    !!}
-                                    @if (isset($group_data))
-                                        <input type="hidden" id="sms_prefix_group_id" value="{{$group_data->sms_prefix_group_id}}" />
-                                    @endif
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Group Name</label>
+                                {!!
+                                    Form::text('group_name',isset($group_data)?$group_data->group_name:null,
+                                    array(
+                                        'class'=>'form-control',
+                                        'id'=>'group_name',
+                                        'placeholder'=>'Group Name',
+                                    ))
+                                !!}
+                                @if (isset($group_data))
+                                    <input type="hidden" id="sms_prefix_group_id" value="{{$group_data->sms_prefix_group_id}}" />
+                                @endif
                             </div>
                         </div>
+                    </div>
                 </div>
                 <div class="form-actions right">
                         <a class=" btn default" href="{{URL::to('sms/group')}}">

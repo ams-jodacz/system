@@ -109,7 +109,7 @@ class MonitorPublic extends Controller {
 								$data->image = $data->id_number.'.jpg';
 							}
 							else{
-								$data->image = 'avatar.png';
+								$data->image = 'gender.jpg';
 							}
 							//
 							$info = $data;
