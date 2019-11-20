@@ -2,7 +2,12 @@
 <?php 
     $data = App\Models\ACL\User::find(Auth::id())->group->permission->groupBy('module_id');
 ?>
-
+<li>
+    <a href="{{URL::to('/')}}">
+        <i class="icon-home"></i>
+        <span class="title">Dashboard</span>
+    </a>
+</li>
 @foreach($sequence as $sequence_num)
     @foreach($data as $permissions)
         <?php if ($permissions[0]->module_id == $sequence_num){ ?>
