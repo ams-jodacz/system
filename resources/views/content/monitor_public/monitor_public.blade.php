@@ -19,205 +19,59 @@
     <div class="container-fluid px-5 pb-5 pt-4">
         <h1 class="main-title">{{(isset($station_group) && isset($station_group->group_name))?$station_group->group_name:''}}</h1>
         <input type="hidden" id="station_group_id" value="{{(isset($station_group) && isset($station_group->station_group_id))?$station_group->station_group_id:0}}" />
-      <div class="row">
-          @foreach($out_stations as $station)
-          <div class="col-md-12 px-5 py-4">
-              <figure class="usercard">
-                  <img src="{{URL::to('/')}}/images/sbu.png" class="usercard__logo img-fluid"/>
-                  <div class="h-100 d-flex">
-                  <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"></div>
-                  <figcaption class="usercard__description">
-                      <div class="usercard__description-inner">
-                      <h1 class="usercard__description-title">
-                          <span class="text d-block station_name_{{$station->station_id}}">
-                          </span>
-                      </h1>
-                      <h3 class="usercard__description-subtitle station_number_{{$station->station_id}}">
-                      </h3>
-                      <h5 class="usercard__description-label station_time_{{$station->station_id}}">
-                      </h5>
-                      </div>
-                      <div class="usercard__footer exit">
-                          {{$station->name}}
-                      </div>
-                  </figcaption>
-                  </div>
-              </figure>
-          </div>
-          @endforeach
-      </div>
-      <div class="row">
-          @foreach($in_stations as $station)
-              <div class="col-md-12 px-5 py-4">
-                  <figure class="usercard">
-                      <img src="{{URL::to('/')}}/images/sbu.png" class="usercard__logo img-fluid"/>
-                      <div class="h-100 d-flex">
-                      <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"></div>
-                      <figcaption class="usercard__description">
-                          <div class="usercard__description-inner">
-                          <h1 class="usercard__description-title">
-                              <span class="text d-block station_name_{{$station->station_id}}">
-                                  <!-- Maria Elisa A. Ramos -->
-                              </span>
-                          </h1>
-                          <h3 class="usercard__description-subtitle station_number_{{$station->station_id}}">
-                              <!-- SHS-201900236 -->
-                          </h3>
-                          <h5 class="usercard__description-label station_time_{{$station->station_id}}">
-                              <!-- 09-27-19 11:01:38 am -->
-                          </h5>
-                          </div>
-                          <div class="usercard__footer entrance">
-                              {{$station->name}}
-                          </div>
-                      </figcaption>
-                      </div>
-                  </figure>
-              </div>
-          @endforeach
-      </div>
-
         <div class="row">
+            @foreach($in_stations as $station)
             <div class="col-md-3 pl-5 pr-4 py-4">
               <figure class="usercard usercard-responsive">
-                <img
-                  src="{{URL::to('/')}}/images/sbu.png"
-                  class="usercard__logo img-fluid"
-                />
+                <img src="{{URL::to('/')}}/images/sbu.png" class="usercard__logo img-fluid" />
                 <div class="h-100 d-flex">
-                  <div
-                    class="usercard__avatar"
-                    style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"
-                  ></div>
-                  <div class="usercard__footer exit">
-                    ANNEX EXIT 1
+                  <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"></div>
+                  <div class="usercard__footer entrance">
+                    {{$station->name}}
                   </div>
                   <figcaption class="usercard__description">
                     <div class="usercard__description-inner">
                       <h1 class="usercard__description-title">
-                        <span class="text-truncate d-block">Maria Elisa A.</span>
-                        <span> Ramos</span>
+                        <span class="text-truncate d-block station_name_{{$station->station_id}}"></span>
                       </h1>
-                      <h3 class="usercard__description-subtitle">
-                        SHS-201900236
-                      </h3>
-    
-                      <h5 class="usercard__description-label">
-                        09-27-19 11:01:38 am
-                      </h5>
+                      <h3 class="usercard__description-subtitle station_number_{{$station->station_id}}"></h3>    
+                      <h5 class="usercard__description-label station_time_{{$station->station_id}}"></h5>
                     </div>
-                    <div class="usercard__footer exit">
-                      ANNEX EXIT 1
+                    <div class="usercard__footer entrance">
+                      {{$station->name}}
                     </div>
                   </figcaption>
                 </div>
               </figure>
             </div>
-            <div class="col-md-3 px-4 py-4">
+            @endforeach
+        </div>
+        <div class="row">
+            @foreach($out_stations as $station)
+            <div class="col-md-3 pl-5 pr-4 py-4">
               <figure class="usercard usercard-responsive">
-                <img
-                  src="{{URL::to('/')}}/images/sbu.png"
-                  class="usercard__logo img-fluid"
-                />
+                <img src="{{URL::to('/')}}/images/sbu.png" class="usercard__logo img-fluid" />
                 <div class="h-100 d-flex">
-                  <div
-                    class="usercard__avatar"
-                    style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"
-                  ></div>
+                  <div class="usercard__avatar station_{{$station->station_id}}" style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"></div>
                   <div class="usercard__footer exit">
-                    ANNEX EXIT 1
+                    {{$station->name}}
                   </div>
                   <figcaption class="usercard__description">
                     <div class="usercard__description-inner">
                       <h1 class="usercard__description-title">
-                        <span class="text-truncate d-block">JON JOSHUA M</span>
-                        <span>PATDU</span>
+                        <span class="text-truncate d-block station_name_{{$station->station_id}}"></span>
                       </h1>
-                      <h3 class="usercard__description-subtitle">
-                        201500092
-                      </h3>
-    
-                      <h5 class="usercard__description-label">
-                        09-27-19 12:08:25 pm
-                      </h5>
+                      <h3 class="usercard__description-subtitle station_number_{{$station->station_id}}"></h3>    
+                      <h5 class="usercard__description-label station_time_{{$station->station_id}}"></h5>
                     </div>
                     <div class="usercard__footer exit">
-                      ANNEX EXIT 1
+                      {{$station->name}}
                     </div>
                   </figcaption>
                 </div>
               </figure>
             </div>
-            <div class="col-md-3 px-4 py-4">
-              <figure class="usercard usercard-responsive">
-                <img
-                  src="{{URL::to('/')}}/images/sbu.png"
-                  class="usercard__logo img-fluid"
-                />
-                <div class="h-100 d-flex">
-                  <div
-                    class="usercard__avatar"
-                    style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"
-                  ></div>
-                  <div class="usercard__footer exit">
-                    ANNEX EXIT 1
-                  </div>
-                  <figcaption class="usercard__description">
-                    <div class="usercard__description-inner">
-                      <h1 class="usercard__description-title">
-                        <span class="text-truncate d-block">Maria Elisa A.</span>
-                        <span> Ramos</span>
-                      </h1>
-                      <h3 class="usercard__description-subtitle">
-                        SHS-201900236
-                      </h3>
-    
-                      <h5 class="usercard__description-label">
-                        09-27-19 11:01:38 am
-                      </h5>
-                    </div>
-                    <div class="usercard__footer exit">
-                      ANNEX EXIT 1
-                    </div>
-                  </figcaption>
-                </div>
-              </figure>
-            </div>
-            <div class="col-md-3 pl-4 pr-5 py-4">
-              <figure class="usercard usercard-responsive">
-                <img
-                  src="{{URL::to('/')}}/images/sbu.png"
-                  class="usercard__logo img-fluid"
-                />
-                <div class="h-100 d-flex">
-                  <div
-                    class="usercard__avatar"
-                    style="background-image: url('{{URL::to('/')}}/images/gender.jpg')"
-                  ></div>
-                  <div class="usercard__footer exit">
-                    ANNEX EXIT 1
-                  </div>
-                  <figcaption class="usercard__description">
-                    <div class="usercard__description-inner">
-                      <h1 class="usercard__description-title">
-                        <span class="text-truncate d-block">JON JOSHUA M</span>
-                        <span>PATDU</span>
-                      </h1>
-                      <h3 class="usercard__description-subtitle">
-                        201500092
-                      </h3>
-    
-                      <h5 class="usercard__description-label">
-                        09-27-19 12:08:25 pm
-                      </h5>
-                    </div>
-                    <div class="usercard__footer exit">
-                      ANNEX EXIT 1
-                    </div>
-                  </figcaption>
-                </div>
-              </figure>
-            </div>
+            @endforeach
         </div>
     </div>
 

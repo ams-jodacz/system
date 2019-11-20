@@ -227,7 +227,7 @@ var MonitorPublic = function () {
     function clearRenderData(station_id) {
         console.log('clear interval ' + station_id);
         // $('.station_' + station_id).attr('src', BASE_URL + '/images/avatar.png');
-        $('.station_' + station_id).css('background-image', 'url(' + BASE_URL + '/images/avatar.png' + ')');
+        $('.station_' + station_id).css('background-image', 'url(' + BASE_URL + '/images/gender.jpg' + ')');
         $('.station_number_' + station_id).text("");
         $('.station_name_' + station_id).text("");
         $('.station_time_' + station_id).text("");
