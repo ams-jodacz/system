@@ -93,7 +93,7 @@
 
         <div class="card" id="print">
             <div class="card-body">
-               <div class="print-content">
+                <div class="print-content">
                     <div class="print-logo">
                         <img src="{{URL::to('/')}}/images/sbu.png" alt="school-logo">
                     </div>
@@ -104,10 +104,10 @@
                     <div class="print-body">
                         <div class="column">
                             <div class="column-row">
-                               <div class="column-left">
+                                <div class="column-left">
                                     <span class="column-label">Name:</span>
                                     <span class="column-value">  
-                                       <strong>Kim Lauren Branzuela</strong>
+                                        <strong>Kim Lauren Branzuela</strong>
                                     </span>
                                </div>
 
@@ -148,7 +148,6 @@
                                     <th colspan="2">PM</th>
                                     <th colspan="2">UNDERTIME</th>
                                     <th colspan="2">TOTAL</th>
-                                    <th>REMARKS</th>
                                 </tr>
                                 
                                 <tr>
@@ -161,7 +160,7 @@
                                     <th>Mins.</th>
                                     <th>Worked</th>
                                     <th>Span</th>
-                                    <th></th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,12 +175,10 @@
                                     <td></td>
                                     <td>8.0</td>
                                     <td>8.6</td>
-                                    <td></td>
                                 </tr>
 
                                 <tr>
                                     <td colspan="6" class="text-center">TOTAL</td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -193,7 +190,7 @@
                                     <td colspan="6">
                                         I CERTIFY on my honor that the above is a true and correct report of the hours performed, recorded with was made daily at the time of arrival and departure from the office.
                                     </td>
-                                    <td colspan="5" class="text-right">VERIFIED as to the prescribed office hours.</td>
+                                    <td colspan="4" class="text-right">VERIFIED as to the prescribed office hours.</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -208,9 +205,119 @@
                     </div>
                </div>
             </div>
-        </div>
-     </div>
- </div>
+
+            <div class="card-body">
+                <div class="print-content">
+                    <div class="print-logo">
+                        <img src="{{URL::to('/')}}/images/sbu.png" alt="school-logo">
+                    </div>
+                    <div class="text-center">
+                        <h3>DAILY TIME RECORD</h3>
+                        <h4>Regular</h4>
+                    </div>
+                    <div class="print-body">
+                        <div class="column">
+                            <div class="column-row">
+                                <div class="column-left">
+                                    <span class="column-label">Name:</span>
+                                    <span class="column-value">  
+                                        <strong>Michael Jumoc</strong>
+                                    </span>
+                                </div>
+
+                                <div class="column-right">
+                                    <span class="column-label">For the period:</span>
+                                    <span class="column-value">  
+                                        <strong>07/01/2019-07/15/2019</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="column-row">
+                                <div class="column-left">
+                                    <span class="column-label">Status:</span>
+                                    <span class="column-value">  
+                                    <strong>Student</strong>
+                                    </span>
+                                </div>
+    
+                                <div class="column-right">
+                                    <span class="column-label">Schedule:</span>
+                                    <span class="column-value">  
+                                        <strong>
+                                            Mon,Tue,Wed,Thu,Fri,Sat 8:00 AM-12:00 PM
+                                            <br/>
+                                            Mon,Tue,Wed,Thu,Fri,Sat 1:00 PM-5:00 PM
+                                        </strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-dtr">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">DAY</th>
+                                    <th colspan="2">AM</th>
+                                    <th colspan="2">PM</th>
+                                    <th colspan="2">TOTAL</th>
+                                    <th>GATE</th>
+                                </tr>
+                                
+                                <tr>
+                                    <th colspan="2"></th>
+                                    <th>In</th>
+                                    <th>Out</th>
+                                    <th>In</th>
+                                    <th>Out</th>
+                                    <th>Worked</th>
+                                    <th>Span</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>7/1/19</td>
+                                    <td>Mon</td>
+                                    <td>7:55 AM</td>
+                                    <td>12:00 PM</td>
+                                    <td>1:00 PM</td>
+                                    <td>5:33 PM</td>
+                                    <td>8.0</td>
+                                    <td>8.6</td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6" class="text-center">TOTAL</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        I CERTIFY on my honor that the above is a true and correct report of the hours performed, recorded with was made daily at the time of arrival and departure from the office.
+                                    </td>
+                                    <td colspan="3" class="text-right">VERIFIED as to the prescribed office hours.</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div class="faculty">
+                            <div class="faculty-signature">
+                                Kim Lauren Branzuela
+                            </div>
+
+                            <div class="faculty-signature"></div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>   
+    </div>
+</div>
 @stop
 
 @section('page_js_plugins')
