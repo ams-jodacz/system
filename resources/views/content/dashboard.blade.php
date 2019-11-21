@@ -214,13 +214,17 @@
 @stop
 
 @section('page_js_plugins')
-    
-@stop
-
-@section('page_scripts')
     <script src="{{URL::to('/')}}/assets/admin/layout/scripts/printThis.js"></script>
 @stop
 
+@section('page_scripts')
+    <script src="{{URL::to('/')}}/assets/page/scripts/dashboard.js"></script>
+@stop
+
 @section('init_js')
-    
+    <script>
+        jQuery(document).ready(function() {       
+           Dashboard.init();
+        });
+    </script>
 @stop
