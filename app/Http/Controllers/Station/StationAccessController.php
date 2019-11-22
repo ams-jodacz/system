@@ -69,25 +69,48 @@ class StationAccessController extends Controller {
 					case 'addAccess':
 						if (Request::isMethod('post') && Input::has('access')){
 							$access_details = json_decode(Input::get('access'),TRUE);
-							$access = StationAccess::where(
-								array(
-									'station_group_id' => $access_details['station_group_id'],
-									'class_group_id' => $access_details['class_group_id']
-								)
-							)->get();
-							if (count($access) > 0){
-								return json_encode(array('msg'=>'Unable to add access, Please try again later!'));
+							if ($access_details['class_group_id'] == ''){
+								$classification_group_list = ClassificationGroup::where('class_id',$access_details['class_id'])->get();
+								foreach($classification_group_list as $class_group){
+									$access = StationAccess::where(
+										array(
+											'station_group_id' => $access_details['station_group_id'],
+											'class_group_id' => $class_group->class_group_id
+										)
+									)->get();
+
+									if (count($access) == 0){
+										$access = new StationAccess;
+										$access->station_group_id = $access_details['station_group_id'];
+										$access->class_group_id = $class_group->class_group_id;
+										if ($access->save()){
+
+										}
+									}
+								}
+								return json_encode(array('status'=>'true','msg'=>'Successfully Added Access!'));
 							}
 							else{
-								$access = new StationAccess;
-								$access->station_group_id = $access_details['station_group_id'];
-								$access->class_group_id = $access_details['class_group_id'];
-								if ($access->save()){
-									return json_encode(array('status'=>'true','msg'=>'Successfully Added Access!'));
-								}
-								return json_encode(array('status'=>'false','msg'=>'Unable To Add Access!'));
+								$access = StationAccess::where(
+									array(
+										'station_group_id' => $access_details['station_group_id'],
+										'class_group_id' => $access_details['class_group_id']
+									)
+								)->get();
 								
+								if (count($access) > 0){
+									return json_encode(array('msg'=>'Unable to add access, Please try again later!'));
+								}
+								else{
+									$access = new StationAccess;
+									$access->station_group_id = $access_details['station_group_id'];
+									$access->class_group_id = $access_details['class_group_id'];
+									if ($access->save()){
+										return json_encode(array('status'=>'true','msg'=>'Successfully Added Access!'));
+									}
+								}
 							}
+							return json_encode(array('status'=>'false','msg'=>'Unable To Add Access!'));
 						}
 						return json_encode(array('status'=>'false','msg'=>'Invalid Request!'));
 						break;
