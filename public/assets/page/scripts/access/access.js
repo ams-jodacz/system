@@ -66,9 +66,9 @@ var Access = function () {
                 class_id: {
                     required: true,
                 },
-                class_group_id: {
-                    required: true,
-                }
+                // class_group_id: {
+                //     required: true,
+                // }
             },
             invalidHandler: function (event, validator) { //display error alert on form submit              
                 success1.hide();

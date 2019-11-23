@@ -537,11 +537,11 @@ var Layout = function () {
         }
     };
 
-    var handlePrintData = function () {
-        $('#print-dtr').click(function () {
-            $('#print').printThis();
-        });
-    }
+    // var handlePrintData = function () {
+    //     $('#print-dtr').click(function () {
+    //         $('#print').printThis();
+    //     });
+    // }
     //* END:CORE HANDLERS *// 
 
     return {
@@ -572,7 +572,7 @@ var Layout = function () {
         initContent: function () {
             handle100HeightContent(); // handles 100% height elements(block, portlet, etc)
             handleTabs(); // handle bootstrah tabs
-            handlePrintData();
+            // handlePrintData();
 
             Metronic.addResizeHandler(handleSidebarAndContentHeight); // recalculate sidebar & content height on window resize
             Metronic.addResizeHandler(handle100HeightContent); // reinitialize content height on window resize 

@@ -297,6 +297,7 @@
 
 .card .card-body {
   padding: 20px 28px;
+  position: relative;
 }
 
 .card-body {
