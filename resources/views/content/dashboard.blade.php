@@ -5,7 +5,7 @@
 @stop
 
 @section('page_level_styles')
-    
+    <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css"/>
 @stop
 
 @section('breadcrumb')
@@ -36,16 +36,12 @@
             <div class="col-md-10">
                 <div class="form-group db-form-group">
                     <label class="control-label">Date Start:</label>
-                    <p class="form-control-static text-center">
-                        <strong>2019-11-11</strong>
-                    </p>
+                    <input readonly="readonly" id="date_start" type="text" />
                 </div>
             
                 <div class="form-group db-form-group">
                     <label class="control-label">Date End:</label>
-                    <p class="form-control-static text-center">
-                        <strong>2019-11-13</strong>
-                    </p>
+                    <input readonly="readonly" id="date_end" type="text" />
                 </div>
             </div>
             <div class="col-md-2">
@@ -322,6 +318,7 @@
 
 @section('page_js_plugins')
     <script src="{{URL::to('/')}}/assets/admin/layout/scripts/printThis.js"></script>
+    <script type="text/javascript" src="{{URL::to('/')}}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 @stop
 
 @section('page_scripts')
