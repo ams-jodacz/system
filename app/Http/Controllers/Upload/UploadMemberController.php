@@ -7,6 +7,7 @@ use App\Models\Members\Member as Member;
 use App\Models\Members\MemberInformation as MemberInformation;
 use App\Models\Classification\ClassificationGroup as ClassificationGroup;
 use App\Models\Prism\PrismViews as PrismViews;
+use App\Models\Tags\Tag as Tag;
 use Request;
 use Input;
 use Controller;
@@ -19,7 +20,7 @@ class UploadMemberController extends Controller {
 
 	public function __construct()
 	{
-	    $this->middleware('auth');
+		$this->middleware('auth');
 	}
 	
 	public function index(){
@@ -88,58 +89,74 @@ class UploadMemberController extends Controller {
 		if (Request::ajax()){
 			if (Input::hasFile('uploaded_file') && Input::has('class_id') && Input::has('class_group_id')){
 				$class_group_id = Input::get('class_group_id');
-	            $file = Input::file('uploaded_file');
-	            $path = $file->getRealPath();            
-	            $datas = array_map('str_getcsv', file($path));
-	            foreach ($datas as $data) {
-	            	if (count($data) == 6){
-	            		$empty_status = true;
-	            		foreach ($data as $info) {
-	            			if ($info != ''){
-	            				$empty_status = false;
-	            			}
-	            		}
-	            		if ($empty_status)
-	            			continue;
-	            		$member = Member::where(
-	            			array(
-	            				'id_number' => $data[0],
-            				)
-            			)->first();
-            			if (empty($member) || is_null($member)){
-            				$member = new Member;
-            				$member->id_number = $data[0];
-            			}
-	            		$member->class_group_id = $class_group_id;
-	            		if ($member->memberInformation == null){
-		            		$memberInformation = new MemberInformation;
-		            		$memberInformation->first_name = $data[1];
-		            		$memberInformation->middle_name = $data[2];
-		            		$memberInformation->last_name = $data[3];
-		            		$memberInformation->contact_number = $data[4];
-		            		$memberInformation->email = $data[5];
-		            		if ($member->save()){
-		            			if ($member->memberInformation()->save($memberInformation)){
-		            				continue;
-		            			}
-		            			$member->delete();
-		            		}
-	            		}
-	            		else{
-		            		$member->memberInformation->first_name = $data[1];
-		            		$member->memberInformation->middle_name = $data[2];
-		            		$member->memberInformation->last_name = $data[3];
-		            		$member->memberInformation->contact_number = $data[4];
-		            		$member->memberInformation->email = $data[5];
-		            		if ($member->save()){
-		            			if ($member->memberInformation->save()){
-		            				continue;
-		            			}
-		            		}
-	            		}
-	            	}
-	            }
-	            return 'true';
+				$file = Input::file('uploaded_file');
+				$path = $file->getRealPath();			
+				$datas = array_map('str_getcsv', file($path));
+				foreach ($datas as $data) {
+					if (count($data) >= 6){
+						$empty_status = true;
+						foreach ($data as $info) {
+							if ($info != ''){
+								$empty_status = false;
+							}
+						}
+						if ($empty_status)
+							continue;
+						$member = Member::where(
+							array(
+								'id_number' => $data[0],
+							)
+						)->first();
+						if (empty($member) || is_null($member)){
+							$member = new Member;
+							$member->id_number = $data[0];
+						}
+						$member->class_group_id = $class_group_id;
+						if ($member->memberInformation == null){
+							$memberInformation = new MemberInformation;
+							$memberInformation->first_name = $data[1];
+							$memberInformation->middle_name = $data[2];
+							$memberInformation->last_name = $data[3];
+							$memberInformation->contact_number = $data[4];
+							$memberInformation->email = $data[5];
+							if ($member->save()){
+								if ($member->memberInformation()->save($memberInformation)){
+									if (count($data) >= 7){
+										$new_tag = new Tag;
+										$new_tag->id_number = $member->id_number;
+										$new_tag->tag = strtoupper($data[6]);
+										$new_tag->save();
+									}
+									continue;
+								}
+								$member->delete();
+							}
+						}
+						else{
+							$member->memberInformation->first_name = $data[1];
+							$member->memberInformation->middle_name = $data[2];
+							$member->memberInformation->last_name = $data[3];
+							$member->memberInformation->contact_number = $data[4];
+							$member->memberInformation->email = $data[5];
+							if ($member->save()){
+								if ($member->memberInformation->save()){
+									if (count($data) >= 7){
+										$member_tag_list = Tag::where('id_numer',$member->id_number)->get();
+										$new_tag = new Tag;
+										if (count($member_tag_list) > 0){
+											$new_tag = Tag::where('id_numer',$member->id_number)->first();
+										}
+										$new_tag->id_number = $member->id_number;
+										$new_tag->tag = strtoupper($data[6]);
+										$new_tag->save();
+									}
+									continue;
+								}
+							}
+						}
+					}
+				}
+				return 'true';
 			}
 			return 'false';
 		}
@@ -166,19 +183,19 @@ class UploadMemberController extends Controller {
 
 			foreach ($datas as $data) {
 				$member = Member::where(
-        			array(
-        				'id_number' => $data->StudentNo,
-    				)
-    			)->first();
-    			if (empty($member) || is_null($member)){
-    				$member = new Member;
-    				$member->id_number = $data->StudentNo;
-    			}
+					array(
+						'id_number' => $data->StudentNo,
+					)
+				)->first();
+				if (empty($member) || is_null($member)){
+					$member = new Member;
+					$member->id_number = $data->StudentNo;
+				}
 
-    			if (isset($student_group_list[$data->SectionName])){
-    				$member->class_group_id = $student_group_list[$data->SectionName];
-    			}
-    			else{
+				if (isset($student_group_list[$data->SectionName])){
+					$member->class_group_id = $student_group_list[$data->SectionName];
+				}
+				else{
 					$new_group = new ClassificationGroup();
 					$new_group->class_id = $classification;
 					$new_group->group_name = $data->SectionName;
@@ -186,35 +203,35 @@ class UploadMemberController extends Controller {
 						$member->class_group_id = $new_group->class_group_id;
 						$student_group_list[$new_group->group_name] = $new_group->class_group_id;
 					}
-    			}
-    			$member->active_status = true;
+				}
+				$member->active_status = true;
 
-        		if ($member->memberInformation == null){
-            		$memberInformation = new MemberInformation;
-            		$memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
-            		$memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
-            		$memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
-            		// $memberInformation->contact_number = $data->MobileNo;
-            		// $memberInformation->email = $data->Email;
-            		if ($member->save()){
-            			if ($member->memberInformation()->save($memberInformation)){
-            				continue;
-            			}
-            			$member->delete();
-            		}
-        		}
-        		else{
-            		$member->memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
-            		$member->memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
-            		$member->memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
-            		// $member->memberInformation->contact_number = $data->MobileNo;
-            		// $member->memberInformation->email = $data->Email;
-            		if ($member->save()){
-            			if ($member->memberInformation->save()){
-            				continue;
-            			}
-            		}
-        		}
+				if ($member->memberInformation == null){
+					$memberInformation = new MemberInformation;
+					$memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
+					$memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
+					$memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
+					// $memberInformation->contact_number = $data->MobileNo;
+					// $memberInformation->email = $data->Email;
+					if ($member->save()){
+						if ($member->memberInformation()->save($memberInformation)){
+							continue;
+						}
+						$member->delete();
+					}
+				}
+				else{
+					$member->memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
+					$member->memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
+					$member->memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
+					// $member->memberInformation->contact_number = $data->MobileNo;
+					// $member->memberInformation->email = $data->Email;
+					if ($member->save()){
+						if ($member->memberInformation->save()){
+							continue;
+						}
+					}
+				}
 			}
 			return 'true';
 		}
@@ -236,19 +253,19 @@ class UploadMemberController extends Controller {
 
 			foreach ($datas as $data) {
 				$member = Member::where(
-        			array(
-        				'id_number' => $data->StudentNo,
-    				)
-    			)->first();
-    			if (empty($member) || is_null($member)){
-    				$member = new Member;
-    				$member->id_number = $data->StudentNo;
-    			}
+					array(
+						'id_number' => $data->StudentNo,
+					)
+				)->first();
+				if (empty($member) || is_null($member)){
+					$member = new Member;
+					$member->id_number = $data->StudentNo;
+				}
 
-    			if (isset($student_group_list[$data->SectionName])){
-    				$member->class_group_id = $student_group_list[$data->SectionName];
-    			}
-    			else{
+				if (isset($student_group_list[$data->SectionName])){
+					$member->class_group_id = $student_group_list[$data->SectionName];
+				}
+				else{
 					$new_group = new ClassificationGroup();
 					$new_group->class_id = $classification;
 					$new_group->group_name = $data->SectionName;
@@ -256,35 +273,35 @@ class UploadMemberController extends Controller {
 						$member->class_group_id = $new_group->class_group_id;
 						$student_group_list[$new_group->group_name] = $new_group->class_group_id;
 					}
-    			}
-    			$member->active_status = true;
+				}
+				$member->active_status = true;
 
-        		if ($member->memberInformation == null){
-            		$memberInformation = new MemberInformation;
-            		$memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
-            		$memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
-            		$memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
-            		// $memberInformation->contact_number = $data->MobileNo;
-            		// $memberInformation->email = $data->Email;
-            		if ($member->save()){
-            			if ($member->memberInformation()->save($memberInformation)){
-            				continue;
-            			}
-            			$member->delete();
-            		}
-        		}
-        		else{
-            		$member->memberInformation->first_name = $data->firstname;
-            		$member->memberInformation->middle_name = $data->middleinitial;
-            		$member->memberInformation->last_name = $data->lastname;
-            		// $member->memberInformation->contact_number = $data->MobileNo;
-            		// $member->memberInformation->email = $data->Email;
-            		if ($member->save()){
-            			if ($member->memberInformation->save()){
-            				continue;
-            			}
-            		}
-        		}
+				if ($member->memberInformation == null){
+					$memberInformation = new MemberInformation;
+					$memberInformation->first_name = empty($data->firstname)?'':$data->firstname;
+					$memberInformation->middle_name = empty($data->middleinitial)?'':$data->middleinitial;
+					$memberInformation->last_name = empty($data->lastname)?'':$data->lastname;
+					// $memberInformation->contact_number = $data->MobileNo;
+					// $memberInformation->email = $data->Email;
+					if ($member->save()){
+						if ($member->memberInformation()->save($memberInformation)){
+							continue;
+						}
+						$member->delete();
+					}
+				}
+				else{
+					$member->memberInformation->first_name = $data->firstname;
+					$member->memberInformation->middle_name = $data->middleinitial;
+					$member->memberInformation->last_name = $data->lastname;
+					// $member->memberInformation->contact_number = $data->MobileNo;
+					// $member->memberInformation->email = $data->Email;
+					if ($member->save()){
+						if ($member->memberInformation->save()){
+							continue;
+						}
+					}
+				}
 			}
 			return 'true';
 		}
