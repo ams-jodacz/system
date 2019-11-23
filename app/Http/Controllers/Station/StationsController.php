@@ -55,9 +55,9 @@ class StationsController extends Controller {
 					case 'checkIP':
 						if (Input::has('station_ip')){
 							$station_ip = Input::get('station_ip');
-							if (!filter_var($station_ip, FILTER_VALIDATE_IP)){
-								return 'false';
-							}
+							// if (!filter_var($station_ip, FILTER_VALIDATE_IP)){
+							// 	return 'false';
+							// }
 							$station = Station::where(array('ip' => $station_ip))->get();
 							if (count($station) > 0){
 								return 'false';
@@ -122,9 +122,9 @@ class StationsController extends Controller {
 					case 'checkIP':
 						if (Input::has('station_ip')){
 							$station_ip = Input::get('station_ip');
-							if (!filter_var($station_ip, FILTER_VALIDATE_IP)){
-								return 'false';
-							}
+							// if (!filter_var($station_ip, FILTER_VALIDATE_IP)){
+							// 	return 'false';
+							// }
 							$station = Station::where(array('ip' => $station_ip))->where('station_id','<>',$id)->get();
 							if (count($station) > 0){
 								return 'false';
