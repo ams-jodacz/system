@@ -112,7 +112,15 @@ class StationsController extends Controller {
 					case 'checkName':
 						if (Input::has('station_name')){
 							$station_name = Input::get('station_name');
-							$station = Station::where(array('name' => $station_name))->where('station_group_id',$id)->get();
+							$station_group_id = Input::get('station_group_id');
+							$station = Station::where(
+								array(
+									'name' => $station_name,
+									'station_group_id',$station_group_id
+									)
+							)
+							->where('station_id','<>',$id)
+							->get();
 							if (count($station) > 0){
 								return 'false';
 							}
