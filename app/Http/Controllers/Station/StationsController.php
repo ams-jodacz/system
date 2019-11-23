@@ -116,8 +116,8 @@ class StationsController extends Controller {
 							$station = Station::where(
 								array(
 									'name' => $station_name,
-									'station_group_id',$station_group_id
-									)
+									'station_group_id' => $station_group_id
+								)
 							)
 							->where('station_id','<>',$id)
 							->get();
