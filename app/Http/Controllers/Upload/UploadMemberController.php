@@ -141,10 +141,10 @@ class UploadMemberController extends Controller {
 							if ($member->save()){
 								if ($member->memberInformation->save()){
 									if (count($data) >= 7){
-										$member_tag_list = Tag::where('id_numer',$member->id_number)->get();
+										$member_tag_list = Tag::where('id_number',$member->id_number)->get();
 										$new_tag = new Tag;
 										if (count($member_tag_list) > 0){
-											$new_tag = Tag::where('id_numer',$member->id_number)->first();
+											$new_tag = Tag::where('id_number',$member->id_number)->first();
 										}
 										$new_tag->id_number = $member->id_number;
 										$new_tag->tag = strtoupper($data[6]);
