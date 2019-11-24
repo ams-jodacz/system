@@ -46,7 +46,7 @@
             </div>
             @endforeach
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             @foreach($out_stations as $station)
             <div class="col-md-3 pl-5 pr-4 py-4">
               <figure class="usercard usercard-responsive">
