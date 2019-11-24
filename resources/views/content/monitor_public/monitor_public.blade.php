@@ -19,7 +19,7 @@
     <div class="container-fluid px-5 pb-5 pt-4">
         <h1 class="main-title">{{(isset($station_group) && isset($station_group->group_name))?$station_group->group_name:''}}</h1>
         <input type="hidden" id="station_group_id" value="{{(isset($station_group) && isset($station_group->station_group_id))?$station_group->station_group_id:0}}" />
-        <div class="row">
+        <div class="row justify-content-center">
             @foreach($in_stations as $station)
             <div class="col-md-3 pl-5 pr-4 py-4">
               <figure class="usercard usercard-responsive">
