@@ -39,6 +39,9 @@
                 <thead>
                     <tr>
                         <th>
+                            Profile
+                        </th>
+                        <th>
                             ID Number
                         </th>
                         <th>

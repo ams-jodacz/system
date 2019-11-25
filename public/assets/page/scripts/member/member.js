@@ -14,6 +14,7 @@ var Member = function () {
             },
             "deferRender": true,
             "columns": [
+                { "data": 'profile_image', render: profileTemplate, "orderable": false,},
                 { "data": 'id_number' },
                 { "data": 'first_name' },
                 { "data": 'middle_name' },
@@ -57,6 +58,11 @@ var Member = function () {
                 }
             });
         });
+    }
+
+    function profileTemplate(data,type,full){
+        var url = BASE_URL + "/images/" + data;
+        return '<center><img src="' + url + '" height="50" width="50" /></center>';
     }
 
     function actionLinks(data, type, full) {

@@ -217,6 +217,7 @@ class MemberController extends Controller {
 				$model_name = 'App\Models\Members\Member';
 				$data = array(
 					'id_number',
+					'id_number',
 					'member_information.first_name',
 					'member_information.middle_name',
 					'member_information.last_name',
@@ -236,6 +237,16 @@ class MemberController extends Controller {
 				$search = Input::get('search');
 				$order = Input::get('order');
 				$response = $this->filterData($model_name,$data,$start,$length,$order,$search,$joins);
+				if (count($response['data']) > 0){
+					foreach($response['data'] as &$response_data){
+						if (file_exists('images/'.$response_data->id_number.'.jpg')){
+							$response_data->profile_image = $response_data->id_number.'.jpg';
+						}
+						else{
+							$response_data->profile_image = 'gender.jpg';
+						}
+					}
+				}
 				return json_encode($response);
 			}
 		}
