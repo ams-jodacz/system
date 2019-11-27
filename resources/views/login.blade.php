@@ -49,12 +49,10 @@
                 <div class="auth-form-light">
                         <div class="brand-header">
                                 <div class="brand-logo">
-                                    <img src="{{URL::to('/')}}/images/sbu.png" alt="brand" class="img-responsive">
+                                    <img src="{{URL::to('/')}}/images/logo.png" alt="brand" class="img-responsive">
                                 </div>
                                 <h4 class="brand-title">
-                                    Access                              
-                                    Management 
-                                    System
+                                    Access Management System
                                 </h4>
                             </div>
                     <form class="login-form" action="{{URL::to('login')}}" method="post">               

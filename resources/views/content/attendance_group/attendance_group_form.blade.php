@@ -1,4 +1,4 @@
-@extends('main2')
+@extends('main')
 
 @section('title')
     Attendance

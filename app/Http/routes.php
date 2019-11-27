@@ -12,7 +12,10 @@
 */
 
 Route::group(['middleware'=>'auth','prefix' => '/'], function(){
-    Route::get('/', 'DashboardController@index');
+    Route::group(array('prefix'=> '/'), function(){
+        Route::get('/', 'DashboardController@index');
+        Route::post('data', 'DashboardController@data');
+    });
 //My Account
     Route::group(array('prefix'=> 'myprofile'), function(){
         Route::get('/', 'MyAccountController@index');
