@@ -78,16 +78,12 @@ return [
 
 		'sqlsrv' => [
 			'driver'   => 'sqlsrv',
-			// 'host'     => env('DB_HOST', 'localhost'),
-			// 'database' => env('DB_DATABASE', 'forge'),
-			// 'username' => env('DB_USERNAME', 'forge'),
-			// 'password' => env('DB_PASSWORD', ''),
 			// 'prefix'   => '',
 			// 'driver'   => 'dblib',
-			'host'     => '172.16.81.25',
-			'database' => 'sbcm',
-			'username' => 'sa',
-			'password' => 'Princ3t3ch',
+			'host'     => env('REF_DB_HOST', 'localhost'),
+			'database' => env('REF_DB_DATABASE', 'forge'),
+			'username' => env('REF_DB_USERNAME', 'forge'),
+			'password' => env('REF_DB_PASSWORD', ''),
 			'prefix'   => '',
 		],
 

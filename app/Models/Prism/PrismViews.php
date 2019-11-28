@@ -17,9 +17,13 @@ class PrismViews extends Model{
         from ES_registrations as reg
         where termid={$term_id}
 		and validationdate is not null
-		and iswithdrawal=0";
-
-        $data = DB::connection('sqlsrv')->select($query);
+        and iswithdrawal=0";
+        
+        $data = array();
+        try {
+            $data = DB::connection('sqlsrv')->select($query);
+        } 
+        catch (\Exception $e) {}
         // $data = array();
         return $data;
     }
@@ -27,16 +31,23 @@ class PrismViews extends Model{
     public static function getTermList(){
         $query = "SELECT top 20 TermID,(AcademicYear+' '+SchoolTerm) as AcadTerm from dbo.ES_AYTerm where SchoolTerm in ('School Year') order by StartofAY desc";
 
-        $data = DB::connection('sqlsrv')->select($query);
-        // $data = array();
+        $data = array();
+        try {
+            $data = DB::connection('sqlsrv')->select($query);
+        } 
+        catch (\Exception $e) {}
+
         return $data;
     }
 
     public static function getSemList(){
         $query = "SELECT top 20 TermID,(AcademicYear+' '+SchoolTerm) as AcadTerm from dbo.ES_AYTerm where SchoolTerm not in ('School Year') order by StartofAY desc";
 
-        $data = DB::connection('sqlsrv')->select($query);
-        // $data = array();
+        $data = array();
+        try {
+            $data = DB::connection('sqlsrv')->select($query);
+        } 
+        catch (\Exception $e) {}
         return $data;
     }
 }
