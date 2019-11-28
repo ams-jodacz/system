@@ -89,6 +89,14 @@
                 </a>
                 @endif
             </div>
+            <div id="action_str_2" style="display:none">
+                @if ($action_value&App\Models\ACL\Action::$Edit)
+                    <a data-id="##NUM##" class="purge_tag btn default btn-xs red">
+                        <!-- <i class="fa fa-trash"></i> -->
+                        Purge Tag
+                    </a>
+                @endif
+            </div>
         </div>
     </div>
 

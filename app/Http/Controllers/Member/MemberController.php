@@ -147,6 +147,15 @@ class MemberController extends Controller {
 						}
 						return 'true';
 						break;
+					case 'purgeData':
+						if (Member::find($id)){
+							$member = Member::find($id);
+							if ($member->tag()->delete()){
+								return json_encode(array('status'=>'true'));
+							}
+						}
+						return json_encode(array('status'=>'false'));
+						break;
 					case 'updateMember':
 						if (Request::isMethod('post') && Input::has('member') && Input::has('recipients')){
 							$member_detail = json_decode(Input::get('member'),TRUE);
@@ -216,8 +225,8 @@ class MemberController extends Controller {
 			if (Input::has('draw') && Input::get('draw')){
 				$model_name = 'App\Models\Members\Member';
 				$data = array(
-					'id_number',
-					'id_number',
+					'members.id_number',
+					'members.id_number',
 					'member_information.first_name',
 					'member_information.middle_name',
 					'member_information.last_name',
@@ -226,8 +235,10 @@ class MemberController extends Controller {
 					'classification_group.group_name',
 					'active_status',
 					'members.member_id',
+					'tags.tag',
 				);
 				$joins = array(
+					'tags,tags.id_number,=,members.id_number,left',
 					'member_information,member_information.member_id,=,members.member_id,inner',
 					'classification_group,classification_group.class_group_id,=,members.class_group_id,inner',
 					'classification,classification.class_id,=,classification_group.class_id,inner',

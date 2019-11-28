@@ -26,10 +26,16 @@
             <form method="post" class="horizontal-form" id="member_form">
                 <h4 class="card-title">Member Form</h4>
                 <div class="row">
-                    <div class="col-md-3">
-                        
-                    </div>
-                    <div class="col-md-9">
+                    <!-- <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    Sample
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -75,13 +81,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">ID Number</label>
-                                    {!!
-                                        Form::text('id_number',isset($member_data)?$member_data->id_number:null,
-                                        array(
+                                    <?php
+                                        $id_number_control = array(
                                             'class'=>'form-control',
                                             'id'=>'id_number',
                                             'placeholder'=>'ID Number',
-                                        ))
+                                        );
+
+                                        if (isset($member_data)){
+                                            $id_number_control['readonly'] = 'readonly';
+                                        }
+                                    ?>
+                                    {!!
+                                        Form::text('id_number',isset($member_data)?$member_data->id_number:null,$id_number_control)
                                     !!}
                                     @if (isset($member_data))
                                         <input type="hidden" id="member_id" value="{{$member_data->member_id}}" />
