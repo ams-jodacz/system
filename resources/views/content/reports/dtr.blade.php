@@ -72,7 +72,7 @@
                             {{$time_log->station->status}}
                         </td>
                         <td>
-                            {{$time_log->station->name}}
+                            {{$time_log->station->stationGroup->group_name.' ('.$time_log->station->name.')'}}
                         </td>
                     </tr>
                     @endforeach
