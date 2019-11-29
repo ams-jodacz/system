@@ -123,7 +123,7 @@ class DashboardController extends Controller {
 						$date_end->second = 59;
 
 						$member_info = MemberInformation::find($member_id);
-						$log_data = TimeLog::whereBetween('date_time',array($date_start,$date_end))->orderBy('date_time','asc')->get();
+						$log_data = TimeLog::where()->whereBetween('date_time',array($date_start,$date_end))->orderBy('date_time','asc')->get();
 						return json_encode(array(
 							'status' => true,
 							'content' => view('content.reports.dtr',array(
