@@ -2,7 +2,7 @@ var Dashboard = function () {
         
     function initPage(){
         $('#print-dtr').click(function () {
-            $('#report_area').printThis();
+            $('.report_container').printThis();
         });
 
         $('#date_start').datepicker({

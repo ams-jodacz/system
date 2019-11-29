@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="card" id="report_area">
+        <div id="report_area">
         </div>   
     </div>
 </div>
