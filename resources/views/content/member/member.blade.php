@@ -77,7 +77,7 @@
                     <?php
                         $filter = array(
                             '1' => 'Active',
-                            '2' => 'In Active',
+                            '0' => 'In Active',
                         );
                     ?>
                     <label>
