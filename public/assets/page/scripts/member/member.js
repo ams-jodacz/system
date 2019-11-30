@@ -5,7 +5,17 @@ var Member = function () {
         var oTable = table.dataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": BASE_URL+'/member/data',
+            "ajax": {
+                'url': BASE_URL + '/member/data',
+                'data': {
+                    'status_filter': function () {
+                        return $('#active_status').val();
+                    },
+                    'group_filter': function () {
+                        return $('#group_filter').val();
+                    },
+                },
+            },
             "pagingType": "simple",
             "language": {
                 "lengthMenu": "_MENU_",
@@ -29,9 +39,40 @@ var Member = function () {
                 },
                 { "render": actionLinks, "data": 'member_id', },
             ],
+            // "dom": '<"row"<"col-md-6 col-sm-12"<"pull-left"f>><"col-md-6 col-sm-12"<"pull-right"l>>r><"table-scrollable"t><"row"<"col-md-5 col-sm-12"i><"col-md-7 col-sm-12"p>>',
+            "dom": '<"row"<"col-md-8 col-sm-12"<"pull-left"<"toolbar pull-right"><"pull-left"f>>><"col-md-4 col-sm-12"<"pull-right"l>>r><"table-scrollable"t><"row"<"col-md-5 col-sm-12"i><"col-md-7 col-sm-12"p>>',
+            // "dom": '<"row"<"col-md-12 col-sm-12"<"pull-left"<"toolbar pull-right"><"pull-left"f>>>r><"table-scrollable"t><"row table_footer"<"col-md-4 col-sm-12"i><"col-md-8 col-sm-12"p>>',
+            // "dom": '<"row"<"col-md-12 col-sm-12"<"pull-left"<"toolbar pull-right"><"pull-left"f>>>r><"table-scrollable"t><"row table_footer"<"col-md-4 col-sm-12"><"col-md-8 col-sm-12"<"pull-right"i>>>',
         });
         var tableWrapper = $('#member_list_table_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
         tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+
+        tableWrapper.find('.toolbar').html($('#action_tbl_filter_str').html());
+
+        $('#active_status').select2().change(function(){
+            oTable.fnDraw();
+        });
+
+        $('#group_filter').select2({
+            allowClear: true,
+            placeholder: 'Select Group..',
+            ajax: {
+                url: BASE_URL + '/member/data?type=group_list',
+                dataType: 'json',
+                data: function (term, page) {
+                    var query = {
+                        search: term,
+                        page: page || 1,
+                    }
+                    return query;
+                },
+                results: function (data) {
+                    return data;
+                },
+            },
+        }).change(function(){
+            oTable.fnDraw();
+        });
 
         oTable.delegate('.purge_tag', 'click', function (event) {
             var data_id = $(this).attr('data-id');

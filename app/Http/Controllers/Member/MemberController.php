@@ -222,43 +222,138 @@ class MemberController extends Controller {
 		$this->checkPageAction($this->page_id,Action::$View);
 		if (Request::ajax())
 		{
-			if (Input::has('draw') && Input::get('draw')){
-				$model_name = 'App\Models\Members\Member';
-				$data = array(
-					'members.id_number',
-					'members.id_number',
-					'member_information.first_name',
-					'member_information.middle_name',
-					'member_information.last_name',
-					'member_information.contact_number',
-					'classification.classification_name',
-					'classification_group.group_name',
-					'active_status',
-					'members.member_id',
-					'tags.tag',
-				);
-				$joins = array(
-					'tags,tags.id_number,=,members.id_number,left',
-					'member_information,member_information.member_id,=,members.member_id,inner',
-					'classification_group,classification_group.class_group_id,=,members.class_group_id,inner',
-					'classification,classification.class_id,=,classification_group.class_id,inner',
-				);
-				$start = Input::get('start');
-				$length = Input::get('length');
-				$search = Input::get('search');
-				$order = Input::get('order');
-				$response = $this->filterData($model_name,$data,$start,$length,$order,$search,$joins);
-				if (count($response['data']) > 0){
-					foreach($response['data'] as &$response_data){
-						if (file_exists('images/'.$response_data->id_number.'.jpg')){
-							$response_data->profile_image = $response_data->id_number.'.jpg';
-						}
-						else{
-							$response_data->profile_image = 'gender.jpg';
+			$action_type = Input::has('type')?Input::get('type'):'';
+
+			$start = Input::has('start')?Input::get('start'):0;
+			$length = Input::has('length')?Input::get('length'):10;
+			$search = Input::has('search')?Input::get('search'):array();
+			$order = Input::has('order')?Input::get('order'):array();
+			$selected_id = Input::has('selected_id')?Input::get('selected_id'):'';
+			$page = Input::has('page')?Input::get('page'):1;
+
+			switch($action_type){
+				case 'group_list':
+					$select = array(
+						'group_name',
+						'class_group_id'
+					);
+
+					$model = ClassificationGroup::select($select);
+
+					if (isset($search) && !empty($search)){
+						$new_search = $search;
+						$model = $model->where(function($q) use ($new_search,$select){
+							$q->where($select[0],'like',$new_search.'%');
+						});
+					}
+					
+
+					$start = $length * ($page-1);
+					$model = $model->skip($start)->take($length+1);
+
+					$model = $model->orderBy($select[0],'ASC');
+
+					if ($selected_id != ''){
+						$model = $model->where($select[count($select) - 1],$selected_id);
+					}
+
+					$data = $model->get();
+					$more = false;
+					if (count($data) > $length){
+						$more = true;
+						unset($data[count($data)-1]);
+					}
+
+					foreach($data as &$info){
+						$info->id = empty($info->class_group_id)?'Unknown':$info->class_group_id;
+						unset($info->class_group_id);
+
+						$info->text = empty($info->group_name)?'Unknown':$info->group_name;
+						unset($info->group_name);
+					}
+
+					return json_encode(array(
+						'results' => $data,
+						'more' => $more,
+					));
+
+					break;
+				default:
+
+					$select = array(
+						'members.id_number',
+						'members.id_number',
+						'member_information.first_name',
+						'member_information.middle_name',
+						'member_information.last_name',
+						'member_information.contact_number',
+						'classification.classification_name',
+						'classification_group.group_name',
+						'active_status',
+						'members.member_id',
+						'tags.tag',
+					);
+
+					$model = Member::select($select)
+						->leftJoin('tags','tags.id_number','=','members.id_number')
+						->join('member_information','member_information.member_id','=','members.member_id')
+						->join('classification_group','classification_group.class_group_id','=','members.class_group_id')
+						->join('classification','classification.class_id','=','classification_group.class_id');
+
+					if (isset($search) && isset($search['value']) && !empty($search['value'])){
+						$new_search = $search['value'];
+						$model = $model->where(function($q) use ($new_search,$select){
+							$q->where($select[0],'like',$new_search.'%')
+								->orWhere($select[2],'like',$new_search.'%')
+								->orWhere($select[3],'like',$new_search.'%')
+								->orWhere($select[4],'like',$new_search.'%')
+								->orWhere($select[5],'like',$new_search.'%')
+								->orWhere($select[6],'like',$new_search.'%')
+								->orWhere($select[7],'like',$new_search.'%')
+								->orWhere($select[9],'like',$new_search.'%');
+						});
+					}
+
+					$model = $model->skip($start)->take($length+1);
+					if (count($order) > 0){
+						foreach($order as $sort){
+							$model = $model->orderBy($select[$sort['column']],$sort['dir']);
 						}
 					}
-				}
-				return json_encode($response);
+
+					$status_filter = Input::has('status_filter')?Input::get('status_filter'):'';
+					if ($status_filter != ''){
+						$model = $model->where('active_status',$status_filter);
+					}
+
+					$group_filter = Input::has('group_filter')?Input::get('group_filter'):'';
+					if ($group_filter != ''){
+						$model = $model->where('classification_group.class_group_id',$group_filter);
+					}
+
+					$data = $model->get();
+					$total = $length+$start;
+					if (count($data) > $length){
+						$total += 1;
+						unset($data[count($data)-1]);
+					}
+
+					foreach($data as &$info){
+						if (file_exists('images/'.$info->id_number.'.jpg')){
+							$info->profile_image = $info->id_number.'.jpg';
+						}
+						else{
+							$info->profile_image = 'gender.jpg';
+						}
+					}
+
+					return json_encode(array(
+						'data' => $data,
+						'recordsTotal' => $total,
+						'recordsFiltered' => $total,
+					));
+
+					break;
 			}
 		}
 	}

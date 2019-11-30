@@ -71,6 +71,30 @@
                     </tr>
                 </thead>
             </table>
+
+            <div id="action_tbl_filter_str" style="display:none">
+                <div>
+                    <?php
+                        $filter = array(
+                            '1' => 'Active',
+                            '2' => 'In Active',
+                        );
+                    ?>
+                    <label>
+                        &nbsp;
+                        <select id="active_status" class="input-medium input-inline form-control" tabindex="1">
+                        <option value="">All</option>
+                            @foreach($filter as $key => $value)
+                                <option value="{{$key}}">{{$value}}</option>
+                            @endforeach
+                        </select>  
+                    </label>
+                    <label>
+                        &nbsp;
+                        <input type="text" class="input-medium input-inline form-control" id="group_filter">
+                    </label>
+                </div>
+            </div>
             <div id="action_str" style="display:none">
                 <a class=" btn default btn-xs" href="{{URL::to('member/view/##NUM##')}}" data-target="#delivery_info_ajax" data-toggle="modal">
                     <i class="fa fa-eye"></i>
