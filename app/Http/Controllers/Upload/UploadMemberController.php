@@ -189,7 +189,11 @@ class UploadMemberController extends Controller {
 						}
 						$new_tag->id_number = $member->id_number;
 						$new_tag->tag = strtoupper(trim($data[1]));
-						$new_tag->save();
+						try {
+							$new_tag->save();
+						} catch (\Throwable $th) {
+							echo 'Error in '.$data[0].' '.$data[1];
+						}
 					}
 				}
 				return 'true';
