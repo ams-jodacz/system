@@ -121,7 +121,7 @@ class UploadMemberController extends Controller {
 							$memberInformation->email = $data[5];
 							if ($member->save()){
 								if ($member->memberInformation()->save($memberInformation)){
-									if (count($data) >= 7){
+									if (count($data) >= 7 && $data[6] != ''){
 										$new_tag = new Tag;
 										$new_tag->id_number = $member->id_number;
 										$new_tag->tag = strtoupper($data[6]);
@@ -140,7 +140,7 @@ class UploadMemberController extends Controller {
 							$member->memberInformation->email = $data[5];
 							if ($member->save()){
 								if ($member->memberInformation->save()){
-									if (count($data) >= 7){
+									if (count($data) >= 7 && $data[6] != ''){
 										$member_tag_list = Tag::where('id_number',$member->id_number)->get();
 										$new_tag = new Tag;
 										if (count($member_tag_list) > 0){
@@ -180,6 +180,9 @@ class UploadMemberController extends Controller {
 							)
 						)->first();
 						if (empty($member) || is_null($member)){
+							continue;
+						}
+						if ($data[1] == ''){
 							continue;
 						}
 						$member_tag_list = Tag::where('id_number',$member->id_number)->get();
