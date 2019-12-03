@@ -163,6 +163,42 @@ class UploadMemberController extends Controller {
 		return view('content.upload_member.upload_member',array('action_value'=>$action_value));
 	}
 
+	public function verify(){
+		set_time_limit(0);
+		$action_value = Permission::getPageAction($this->page_module,$this->page_id);
+		$this->checkPageAction($this->page_id,Action::$View);
+		if (Request::ajax()){
+			if (Input::hasFile('verify_file')){
+				$file = Input::file('verify_file');
+				$path = $file->getRealPath();
+				$datas = array_map('str_getcsv', file($path));
+				foreach ($datas as $data) {
+					if (count($data) >= 2){
+						$member = Member::where(
+							array(
+								'id_number' => trim($data[0]),
+							)
+						)->first();
+						if (empty($member) || is_null($member)){
+							continue;
+						}
+						$member_tag_list = Tag::where('id_number',$member->id_number)->get();
+						$new_tag = new Tag;
+						if (count($member_tag_list) > 0){
+							$new_tag = Tag::where('id_number',$member->id_number)->first();
+						}
+						$new_tag->id_number = $member->id_number;
+						$new_tag->tag = strtoupper(trim($data[1]));
+						$new_tag->save();
+					}
+				}
+				return 'true';
+			}
+			return 'false';
+		}
+		return view('content.upload_member.upload_member',array('action_value'=>$action_value));
+	}
+
 	public function sync(){
 		set_time_limit(0);
 		if (Input::has('grad_term_id') && Input::has('dest_class_id')){

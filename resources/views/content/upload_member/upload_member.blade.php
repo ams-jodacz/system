@@ -31,6 +31,7 @@
                 </div>
                 <div class="portlet-body">
                     @include('content.upload_member.form.upload_member_form')
+                    @include('content.upload_member.form.verify_member_form')
                     @include('content.upload_member.form.grad_member_form')
                     @include('content.upload_member.form.k12_member_form')
                     @include('content.upload_member.form.member_transfer_form')

@@ -35,8 +35,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label class="control-label">Filename</label>
-                                                    <span class="btn green fileinput-button">
+                                                    <label class="control-label">File</label>
+                                                    <span class="btn green fileinput-button form-control">
                                                         <input type="file" name="uploaded_file" id="uploaded_file">
                                                     </span>
                                                 </div>

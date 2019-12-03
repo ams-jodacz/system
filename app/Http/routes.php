@@ -202,6 +202,7 @@ Route::group(['middleware'=>'auth','prefix' => '/'], function(){
             Route::get('/', 'Upload\UploadMemberController@index');
             Route::get('view/{id}', 'Upload\UploadMemberController@view');
             Route::match(array('POST'),'add', 'Upload\UploadMemberController@add');
+            Route::match(array('POST'),'verify', 'Upload\UploadMemberController@verify');
             Route::match(array('POST'),'sync', 'Upload\UploadMemberController@sync');
             Route::match(array('POST'),'transfer', 'Upload\UploadMemberController@transfer');
             Route::get('data', 'Upload\UploadMemberController@data');
