@@ -179,8 +179,6 @@ class UploadMemberController extends Controller {
 								'id_number' => trim($data[0]),
 							)
 						)->first();
-						echo $data[0].'   '.$data[1].'<br/>';
-						continue;
 						if (empty($member) || is_null($member)){
 							continue;
 						}
