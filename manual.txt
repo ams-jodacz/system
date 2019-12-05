@@ -1,0 +1,6 @@
+AMS_SERVER/API?type=timelogs&start_date=YYYY-MM-DD&end_date=YYYY-MM-DD&id_numbers=ID_NUMBER
+
+ID_NUMBER separator = ','
+ex: 
+
+10715549,10715568,10715510

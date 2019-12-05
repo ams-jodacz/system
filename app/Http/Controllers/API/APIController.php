@@ -23,6 +23,7 @@ use Controller;
 use Carbon\Carbon as Carbon;
 use App\Models\Prism\PrismViews as PrismViews;
 use App\Helper\Socket;
+use DB;
 
 class APIController extends Controller {
 
@@ -412,6 +413,74 @@ class APIController extends Controller {
 						$data = PrismViews::getOfficialK12List($term_id);
 						print_r($data);
 					}
+					break;
+				case 'timelogs':
+					if (Input::has('start_date') && Input::has('end_date')){
+						$start_date = null;
+						$end_date = null;
+						if (Input::has('start_date')){
+							try {
+								$start_date = Carbon::parse(Input::get('start_date'));
+							}
+							catch (Throwable $e) {
+							}
+						}
+						if (Input::has('end_date')){
+							try {
+								$end_date = Carbon::parse(Input::get('end_date'));
+							}
+							catch (Throwable $e) {
+							}
+						}
+						if ($start_date != null && $end_date != null){
+							$id_number = Input::has('id_numbers')?Input::get('id_numbers'):'';
+							$id_number_list = array();
+							if ($id_number != ''){
+								$id_number_list = explode(',',$id_number);
+							}
+							if ($start_date->diffInDays($end_date, false) >= 0){
+								$start_date->hour = 0;
+								$start_date->minute = 0;
+								$start_date->second = 0;
+
+								$end_date->hour = 23;
+								$end_date->minute = 59;
+								$end_date->second = 59;
+								
+								$log_data = TimeLog::whereBetween('date_time',array($start_date,$end_date))->orderBy('date_time','asc');
+								if (count($id_number_list) > 0){
+									$log_data = $log_data->whereIn('id_number',$id_number_list);
+								}
+								
+								$data_list = $log_data->select(array(
+									'id_number',
+									DB::raw('DATE_FORMAT(date_time,"%Y/%m/%d %h:%i:%s") as date')
+								))->get();
+								if (count($data_list) > 0){
+									return json_encode(
+										array(
+											'error' => false,
+											'data' =>$data_list->toArray()
+										)
+									);
+								}
+								else{
+									return json_encode(
+										array(
+											'error'=>false,
+											'data' => array(),
+										)
+									);
+								}
+							}
+						}
+					}
+					return json_encode(
+						array(
+							'error'=>true,
+							'message'=>'Unknow Request'
+						)
+					);
 					break;
 			}
 		}
