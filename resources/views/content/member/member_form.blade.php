@@ -26,16 +26,16 @@
             <form method="post" class="horizontal-form" id="member_form">
                 <h4 class="card-title">Member Form</h4>
                 <div class="row">
-                    <!-- <div class="col-md-3">
+                    <div class="col-md-3">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    Sample
+                                    
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-                    <div class="col-md-12">
+                    </div>
+                    <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
