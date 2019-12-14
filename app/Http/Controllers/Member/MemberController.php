@@ -9,6 +9,8 @@ use App\Models\Classification\ClassificationGroup as ClassificationGroup;
 use Request;
 use Input;
 use Controller;
+use URL;
+use Carbon\Carbon as Carbon;
 
 class MemberController extends Controller {
 	protected $page_module = 4;
@@ -137,6 +139,32 @@ class MemberController extends Controller {
 		if (Request::ajax()){
 			if (Input::has('actionType')){
 				switch(Input::get('actionType')){
+					case 'uploadImage':
+						if (Input::hasFile('file') && Member::find($id)){
+							if (Input::file('file')->isValid()){
+								$file = Input::file('file');
+								$extension = $file->getClientOriginalExtension();
+								if ($extension != 'jpg'){
+									return json_encode(array('status'=>false,'msg'=>'Invalid File Type!'));
+								}
+
+								$member_info = Member::find($id);
+								$file_path = realpath("images");
+
+								if (file_exists('images/'.$member_info->id_number.'.jpg')){
+									unlink('images/'.$member_info->id_number.'.jpg');
+								}
+
+								if ($file->move($file_path,$member_info->id_number.'.'.$extension)){
+									$current_date = Carbon::now()->timestamp;
+									$image_loc = URL::to('images/'.$member_info->id_number.'.'.$extension.'?date='.$current_date);
+									return json_encode(array('status'=>true,'image_loc'=>$image_loc,'msg'=>'Successfully Uploaded Image!'));
+								}
+							}
+							return json_encode(array('status'=>false,'msg'=>'Unexpected error, Please try again later!'));
+						}
+						return json_encode(array('status'=>false,'msg'=>'Unexpected error, Please try again later!'));
+						break;
 					case 'checkID':
 						if (Input::has('id_number')){
 							$id_number = Input::get('id_number');
@@ -202,6 +230,13 @@ class MemberController extends Controller {
 			}
 		}
 		$member_data = Member::find($id);
+
+		if (file_exists('images/'.$member_data->id_number.'.jpg')){
+			$member_data->profile_image = $member_data->id_number.'.jpg';
+		}
+		else{
+			$member_data->profile_image = 'gender.jpg';
+		}
 		return view('content.member.member_form',array('member_data'=>$member_data));
 	}
 

@@ -115,6 +115,41 @@ var MemberForm = function () {
 
         $('.select2').select2();
 
+        new Dropzone("#member_form_dropzone", {
+            url: BASE_URL+"/member/"+url, 
+            acceptedFiles: ".jpg",
+            parallelUploads: 1,
+            maxFiles: 1,
+            maxfilesexceeded: function(file){
+                this.removeAllFiles();
+            },
+            complete: function(file){
+                if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                    this.removeFile(file);
+                }
+            },
+            success: function(file, response){
+                response = jQuery.parseJSON(response);
+                if (response.status){
+                    $('#member_form_dropzone').find('.dz-message').html(
+                        '<span>'+
+                            '<center>'+
+                                '<img class="img-responsive" src="'+response.image_loc+'" style="cursor:pointer"/>'+
+                            '</center>'+
+                        '</span>'
+                    ).removeClass('dz-default');
+                }
+                else{
+                    bootbox.alert("Unexpected error encounter, Please try again!");
+                    this.removeAllFiles();
+                }
+            },
+            sending: function(file,xhr,formData){
+                formData.append('actionType','uploadImage');
+            },
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        });
+
         initButtons();
 
         $('#recipient_info_ajax').on('hidden.bs.modal', function () {

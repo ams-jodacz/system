@@ -6,6 +6,7 @@
 
 @section('page_level_styles')
     <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/assets/global/plugins/select2/select2.css"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/assets/global/plugins/dropzone/css/dropzone.css"/>
     <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"/>
     <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
     <link rel="stylesheet" type="text/css" href="{{URL::to('/')}}/assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>
@@ -26,16 +27,28 @@
             <form method="post" class="horizontal-form" id="member_form">
                 <h4 class="card-title">Member Form</h4>
                 <div class="row">
+                    @if (isset($member_data))
                     <div class="col-md-3">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    
+                                <div class="dropzone" id="member_form_dropzone" style="cursor:pointer">
+                                    <div class="dz-message" data-dz-message>
+                                        <span>
+                                            <center>
+                                                <img class="img-responsive" src="{{URL::to('images/'.$member_data->profile_image)}}" style="max-width:320px; height:auto;cursor:pointer"/>
+                                            </center>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endif
+                    @if (isset($member_data))
                     <div class="col-md-9">
+                    @else
+                    <div class="col-md-12">
+                    @endif
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -224,6 +237,7 @@
     <script type="text/javascript" src="{{URL::to('/')}}/assets/global/plugins/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="{{URL::to('/')}}/assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
     <script type="text/javascript" src="{{URL::to('/')}}/assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>
+    <script type="text/javascript" src="{{URL::to('/')}}/assets/global/plugins/dropzone/dropzone.js"></script>
 @stop
 
 @section('page_scripts')
