@@ -5,7 +5,20 @@ var MonitorHistory = function () {
         var oTable = table.dataTable({
             // "processing": true,
             "serverSide": true,
-            "ajax": BASE_URL + '/monitor/history/data',
+            "ajax": {
+                url: BASE_URL + '/monitor/history/data',
+                data: {
+                    group_id: function(){
+                        return $('#station_group_id').val();
+                    },
+                    date_time_start: function(){
+                        return $('#date_time_start').val();
+                    },
+                    date_time_end: function(){
+                        return $('#date_time_end').val();
+                    },
+                },
+            },
             "deferRender": true,
             "order": [],
             "pagingType": "simple",
@@ -35,6 +48,34 @@ var MonitorHistory = function () {
         tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
 
         $('.select2').select2();
+
+        $('#station_group_id').select2({
+            allowClear: true,
+        });
+
+        $('#date_time_start').datetimepicker({
+            // defaultDate: new Date(),
+            // format: 'MM dd, YYYY  hh:mm:ss a',
+            showMeridian: true,
+            format: 'M dd, yyyy  HH:ii p',
+            todayBtn: true,
+        });
+
+        $('#date_time_end').datetimepicker({
+            // defaultDate: new Date(),
+            // format: 'MM dd, YYYY  hh:mm:ss a',
+            showMeridian: true,
+            format: 'M dd, yyyy  HH:ii p',
+            todayBtn: true,
+        });
+
+        $('#filter_data').click(function(){
+            oTable.api().ajax.reload(null,false);
+        });
+
+        $('#generate_report_data').click(function(){
+            oTable.printThis();
+        });
     }
 
     function actionLinks(data, type, full) {
