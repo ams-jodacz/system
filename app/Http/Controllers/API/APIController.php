@@ -169,12 +169,12 @@ class APIController extends Controller {
 					break;
 				// Attendance
 				case 'attendance': // get allowed user for attendance per station
-					if (Input::has('ip')){
-						$ip = Input::get('ip');
+					if (Input::has('stag')){
+						$stag = Input::get('stag');
 
 						$station = AttendanceStation::where(
 							array(
-								'ip' => $ip,
+								'ip' => $stag,
 							)
 						)->first();
 
@@ -199,8 +199,8 @@ class APIController extends Controller {
 					break;
 				case 'attendance_timelog':
 					$status = false;
-					if (Input::has('ip') && Input::has('date_time') && Input::has('id_number') && Input::has('status')){
-						$ip = Input::get('ip');
+					if (Input::has('stag') && Input::has('date_time') && Input::has('id_number') && Input::has('status')){
+						$stag = Input::get('stag');
 						$date_time = Input::get('date_time');
 						$id_number = Input::get('id_number');
 						$status = Input::get('status');
@@ -209,7 +209,7 @@ class APIController extends Controller {
 
 						$station = AttendanceStation::where(
 							array(
-								'ip' => $ip,
+								'ip' => $stag,
 							)
 						)->first();
 
@@ -238,11 +238,11 @@ class APIController extends Controller {
 				//Turnstile loging
 				case 'access_check':
 					$status = false;
-					if (Input::has('ip') && Input::has('tag')){
-						$ip = Input::get('ip');
+					if (Input::has('stag') && Input::has('tag')){
+						$stag = Input::get('stag');
 						$tag_number = Input::get('tag');
 
-						$station = Station::where('ip',$ip)->first();
+						$station = Station::where('ip',$stag)->first();
 						if (!is_null($station) && !empty($station)){
 							$socket_data = array();
 							//check if valid member
@@ -360,11 +360,11 @@ class APIController extends Controller {
 					// 	'image_loc' => $img,
 					// );
 
-					if (Input::has('ip') && Input::has('tag')){
-						$ip = Input::get('ip');
+					if (Input::has('stag') && Input::has('tag')){
+						$stag = Input::get('stag');
 						$tag_number = Input::get('tag');
 
-						$station = AttendanceStation::where('ip',$ip)->first();
+						$station = AttendanceStation::where('ip',$stag)->first();
 						$tags = Tag::where('tag',$tag_number)->first();
 						if (!is_null($station) && !empty($station) && !is_null($tags) && !empty($tags)){
 							$member = Member::where('id_number',$tags->id_number)->first();
